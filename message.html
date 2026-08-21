@@ -1,1 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>For You, With Love 💖</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Georgia", "Times New Roman", serif;
+            color: #54253a;
+
+            background:
+                radial-gradient(circle at 15% 15%, rgba(255,255,255,.9), transparent 25%),
+                radial-gradient(circle at 85% 25%, rgba(255,210,225,.7), transparent 30%),
+                linear-gradient(135deg, #fff1f6, #ffe3ee, #f8d8e7);
+
+            overflow-x: hidden;
+        }
+
+        /* ---------- Floating Hearts ---------- */
+
+        .heart {
+            position: fixed;
+            bottom: -50px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0;
+            animation: floatHeart linear forwards;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: .8;
+            }
+
+            90% {
+                opacity: .7;
+            }
+
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* ---------- Main Container ---------- */
+
+        .page {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 850px;
+            margin: auto;
+            padding: 30px 18px 70px;
+        }
+
+        /* ---------- Top ---------- */
+
+        .top {
+            min-height: 92vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .opening-card {
+            width: 100%;
+            padding: 55px 30px;
+
+            background: rgba(255,255,255,.58);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border: 1px solid rgba(255,255,255,.8);
+            border-radius: 35px;
+
+            box-shadow:
+                0 25px 70px rgba(124,44,78,.18);
+
+            animation: appear 1.2s ease;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .emoji {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+        .small-title {
+            font-family: Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 11px;
+            color: #a14d70;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            font-size: clamp(42px, 8vw, 70px);
+            font-weight: 500;
+            color: #632c46;
+            line-height: 1.1;
+        }
+
+        h1 span {
+            color: #b94e78;
+            font-style: italic;
+        }
+
+        .divider {
+            width: 80px;
+            height: 2px;
+            margin: 25px auto;
+            background: #c76b8d;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #704258;
+        }
+
+        .scroll-text {
+            margin-top: 35px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #9a657b;
+        }
+
+        /* ---------- Message ---------- */
+
+        .message-card {
+            margin-top: 20px;
+            padding: 50px 38px;
+
+            background: rgba(255,255,255,.68);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border: 1px solid rgba(255,255,255,.85);
+            border-radius: 32px;
+
+            box-shadow:
+                0 20px 60px rgba(124,44,78,.15);
+        }
+
+        .message-heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .message-heading .mini-heart {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .message-heading h2 {
+            font-size: clamp(30px, 6vw, 45px);
+            font-weight: 500;
+            color: #632c46;
+        }
+
+        .message-heading p {
+            margin-top: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            color: #9a657b;
+            letter-spacing: 1px;
+        }
+
+        .message-content {
+            font-size: 18px;
+            line-height: 2;
+            color: #653b4d;
+        }
+
+        .message-content p {
+            margin-bottom: 25px;
+        }
+
+        .highlight {
+            text-align: center;
+            margin: 35px 0;
+            padding: 25px 20px;
+
+            border-top: 1px solid rgba(180,90,125,.25);
+            border-bottom: 1px solid rgba(180,90,125,.25);
+
+            color: #a14169;
+            font-size: 22px;
+            font-style: italic;
+        }
+
+        /* ---------- Ending ---------- */
+
+        .ending {
+            text-align: center;
+            padding: 60px 20px 20px;
+        }
+
+        .ending-heart {
+            font-size: 42px;
+            animation: pulse 1.8s infinite;
+        }
+
+        .ending h2 {
+            margin-top: 18px;
+            font-size: clamp(30px, 6vw, 48px);
+            font-weight: 500;
+            color: #632c46;
+        }
+
+        .ending p {
+            margin-top: 15px;
+            font-size: 17px;
+            line-height: 1.8;
+            color: #704258;
+        }
+
+        .signature {
+            margin-top: 30px;
+            font-size: 22px;
+            color: #a14169;
+            font-style: italic;
+        }
+
+        /* ---------- Back Button ---------- */
+
+        .back {
+            display: inline-block;
+            margin-top: 35px;
+            padding: 13px 25px;
+
+            border: 1px solid rgba(161,77,112,.35);
+            border-radius: 30px;
+
+            color: #8f315b;
+            text-decoration: none;
+
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+
+            transition: .3s;
+        }
+
+        .back:hover {
+            background: rgba(255,255,255,.5);
+            transform: translateY(-3px);
+        }
+
+        /* ---------- Mobile ---------- */
+
+        @media (max-width: 600px) {
+
+            .page {
+                padding: 18px 14px 50px;
+            }
+
+            .opening-card {
+                padding: 45px 22px;
+                border-radius: 28px;
+            }
+
+            .message-card {
+                padding: 38px 22px;
+                border-radius: 26px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+            }
+
+            .message-content {
+                font-size: 16px;
+                line-height: 1.9;
+            }
+
+            .highlight {
+                font-size: 19px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- Opening -->
+        <section class="top">
+
+            <div class="opening-card">
+
+                <div class="emoji">🎂</div>
+
+                <div class="small-title">
+                    A Birthday Message
+                </div>
+
+                <h1>
+                    Happy <span>Birthday</span> ❤️
+                </h1>
+
+                <div class="divider"></div>
+
+                <p class="subtitle">
+                    Today is your special day,
+                    and I wanted to make sure
+                    there was something here
+                    just for you. ✨
+                </p>
+
+                <div class="scroll-text">
+                    ↓ Keep scrolling ↓
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Message -->
+        <section class="message-card">
+
+            <div class="message-heading">
+
+                <div class="mini-heart">💗</div>
+
+                <h2>A Little Something For You</h2>
+
+                <p>READ THIS WITH A SMILE</p>
+
+            </div>
+
+
+            <div class="message-content">
+
+                <p>
+                    Dear Beautiful,
+                </p>
+
+                <p>
+                    First of all, a very Happy Birthday to you! 🎂❤️
+                    I hope this beautiful day brings you countless
+                    reasons to smile and reminds you how special
+                    you truly are.
+                </p>
+
+                <p>
+                    Sometimes there are people who become a beautiful
+                    part of our lives without even realizing how much
+                    they mean to us. And today felt like the perfect
+                    day to tell you that you are one of those people.
+                </p>
+
+                <div class="highlight">
+                    "Some people make ordinary moments feel like
+                    memories worth keeping forever." 💕
+                </div>
+
+                <p>
+                    I hope this new year of your life brings you
+                    happiness, peace, success, beautiful surprises,
+                    and everything your heart wishes for.
+                </p>
+
+                <p>
+                    Keep smiling, keep being the wonderful person
+                    you are, and never forget that you deserve
+                    all the beautiful things life has to offer.
+                </p>
+
+                <p>
+                    And yes... today you are officially allowed
+                    to eat as much cake as you want. 😄🎂
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Ending -->
+        <section class="ending">
+
+            <div class="ending-heart">💖</div>
+
+            <h2>Once Again, Happy Birthday!</h2>
+
+            <p>
+                May your smile stay this beautiful,
+                your heart stay this pure,
+                and your life always be filled
+                with beautiful moments.
+            </p>
+
+            <div class="signature">
+                With lots of love & best wishes ♡
+            </div>
+
+            <a href="index.html" class="back">
+                ← Back to Home
+            </a>
+
+        </section>
+
+    </div>
+
+
+    <script>
+
+        const symbols = ["♡", "♥", "💕", "✨"];
+
+        function createHeart() {
+
+            const heart = document.createElement("div");
+
+            heart.className = "heart";
+
+            heart.innerHTML =
+                symbols[Math.floor(Math.random() * symbols.length)];
+
+            heart.style.left = Math.random() * 100 + "%";
+
+            heart.style.fontSize =
+                (12 + Math.random() * 18) + "px";
+
+            const duration = 8 + Math.random() * 8;
+
+            heart.style.animationDuration =
+                duration + "s";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000);
+        }
+
+        setInterval(createHeart, 1100);
+
+    </script>
+
+</body>
+</html>
