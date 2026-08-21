@@ -30,7 +30,9 @@
             overflow-x: hidden;
         }
 
-        /* ---------- Floating Hearts ---------- */
+        /* ==============================
+           FLOATING HEARTS
+        ============================== */
 
         .heart {
             position: fixed;
@@ -61,7 +63,9 @@
             }
         }
 
-        /* ---------- Main Container ---------- */
+        /* ==============================
+           MAIN CONTAINER
+        ============================== */
 
         .page {
             position: relative;
@@ -72,7 +76,9 @@
             padding: 30px 18px 70px;
         }
 
-        /* ---------- Top ---------- */
+        /* ==============================
+           OPENING SECTION
+        ============================== */
 
         .top {
             min-height: 92vh;
@@ -165,7 +171,9 @@
             color: #9a657b;
         }
 
-        /* ---------- Message ---------- */
+        /* ==============================
+           MESSAGE CARD
+        ============================== */
 
         .message-card {
             margin-top: 20px;
@@ -229,7 +237,139 @@
             font-style: italic;
         }
 
-        /* ---------- Ending ---------- */
+        /* ==============================
+           MEMORY SECTION
+        ============================== */
+
+        .memories {
+            margin-top: 35px;
+            padding: 50px 30px;
+
+            background: rgba(255,255,255,.58);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border: 1px solid rgba(255,255,255,.85);
+            border-radius: 32px;
+
+            box-shadow:
+                0 20px 60px rgba(124,44,78,.15);
+        }
+
+        .memories-heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .memories-heading .camera {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .memories-heading h2 {
+            font-size: clamp(30px, 6vw, 44px);
+            font-weight: 500;
+            color: #632c46;
+        }
+
+        .memories-heading p {
+            margin-top: 12px;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            color: #9a657b;
+            letter-spacing: 1px;
+        }
+
+        /* ==============================
+           PHOTO GRID
+        ============================== */
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        .photo-card {
+            position: relative;
+            overflow: hidden;
+
+            background: white;
+            padding: 9px 9px 15px;
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 12px 30px rgba(105,45,70,.16);
+
+            transition:
+                transform .4s ease,
+                box-shadow .4s ease;
+        }
+
+        .photo-card:nth-child(1) {
+            transform: rotate(-2deg);
+        }
+
+        .photo-card:nth-child(2) {
+            transform: rotate(2deg);
+        }
+
+        .photo-card:nth-child(3) {
+            transform: rotate(1.5deg);
+        }
+
+        .photo-card:nth-child(4) {
+            transform: rotate(-1.5deg);
+        }
+
+        .photo-card:hover {
+            transform: translateY(-8px) rotate(0deg) scale(1.02);
+
+            box-shadow:
+                0 20px 40px rgba(105,45,70,.22);
+        }
+
+        .photo-card img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+
+            border-radius: 9px;
+        }
+
+        .photo-caption {
+            text-align: center;
+            padding-top: 12px;
+
+            font-size: 14px;
+            color: #7a465b;
+            font-style: italic;
+        }
+
+        /* ==============================
+           MEMORY QUOTE
+        ============================== */
+
+        .memory-quote {
+            margin-top: 38px;
+            text-align: center;
+
+            padding: 25px 15px;
+
+            border-top: 1px solid rgba(180,90,125,.25);
+            border-bottom: 1px solid rgba(180,90,125,.25);
+
+            color: #a14169;
+            font-size: 21px;
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        /* ==============================
+           ENDING
+        ============================== */
 
         .ending {
             text-align: center;
@@ -262,7 +402,9 @@
             font-style: italic;
         }
 
-        /* ---------- Back Button ---------- */
+        /* ==============================
+           BACK BUTTON
+        ============================== */
 
         .back {
             display: inline-block;
@@ -286,7 +428,9 @@
             transform: translateY(-3px);
         }
 
-        /* ---------- Mobile ---------- */
+        /* ==============================
+           MOBILE
+        ============================== */
 
         @media (max-width: 600px) {
 
@@ -304,6 +448,11 @@
                 border-radius: 26px;
             }
 
+            .memories {
+                padding: 38px 18px;
+                border-radius: 26px;
+            }
+
             .subtitle {
                 font-size: 16px;
             }
@@ -316,15 +465,47 @@
             .highlight {
                 font-size: 19px;
             }
+
+            .photo-grid {
+                gap: 15px;
+            }
+
+            .photo-card {
+                padding: 7px 7px 12px;
+            }
+
+            .photo-caption {
+                font-size: 12px;
+                padding-top: 9px;
+            }
+
+            .memory-quote {
+                font-size: 18px;
+            }
         }
     </style>
 </head>
 
 <body>
 
+    <!-- ==============================
+         FLOATING HEARTS
+    ============================== -->
+
+    <div class="heart" style="left:8%; animation-duration:9s;">♡</div>
+    <div class="heart" style="left:22%; animation-duration:12s;">♥</div>
+    <div class="heart" style="left:38%; animation-duration:10s;">♡</div>
+    <div class="heart" style="left:55%; animation-duration:13s;">💕</div>
+    <div class="heart" style="left:72%; animation-duration:11s;">♡</div>
+    <div class="heart" style="left:88%; animation-duration:14s;">♥</div>
+
+
     <div class="page">
 
-        <!-- Opening -->
+        <!-- ==============================
+             OPENING
+        ============================== -->
+
         <section class="top">
 
             <div class="opening-card">
@@ -357,7 +538,10 @@
         </section>
 
 
-        <!-- Message -->
+        <!-- ==============================
+             MESSAGE
+        ============================== -->
+
         <section class="message-card">
 
             <div class="message-heading">
@@ -418,7 +602,107 @@
         </section>
 
 
-        <!-- Ending -->
+        <!-- ==============================
+             MEMORIES / PHOTOS
+        ============================== -->
+
+        <section class="memories">
+
+            <div class="memories-heading">
+
+                <div class="camera">📸</div>
+
+                <h2>A Few Memories</h2>
+
+                <p>
+                    MOMENTS WORTH KEEPING
+                </p>
+
+            </div>
+
+
+            <div class="photo-grid">
+
+                <!-- PHOTO 1 -->
+
+                <div class="photo-card">
+
+                    <img
+                        src="https://picsum.photos/seed/birthday1/600/600"
+                        alt="Beautiful memory"
+                    >
+
+                    <div class="photo-caption">
+                        A beautiful moment ♡
+                    </div>
+
+                </div>
+
+
+                <!-- PHOTO 2 -->
+
+                <div class="photo-card">
+
+                    <img
+                        src="https://picsum.photos/seed/birthday2/600/600"
+                        alt="Beautiful memory"
+                    >
+
+                    <div class="photo-caption">
+                        A memory to remember ✨
+                    </div>
+
+                </div>
+
+
+                <!-- PHOTO 3 -->
+
+                <div class="photo-card">
+
+                    <img
+                        src="https://picsum.photos/seed/birthday3/600/600"
+                        alt="Beautiful memory"
+                    >
+
+                    <div class="photo-caption">
+                        Moments like these 💕
+                    </div>
+
+                </div>
+
+
+                <!-- PHOTO 4 -->
+
+                <div class="photo-card">
+
+                    <img
+                        src="https://picsum.photos/seed/birthday4/600/600"
+                        alt="Beautiful memory"
+                    >
+
+                    <div class="photo-caption">
+                        Forever a special memory ❤️
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="memory-quote">
+
+                "The best memories are the ones
+                we never planned to make." 💗
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             ENDING
+        ============================== -->
+
         <section class="ending">
 
             <div class="ending-heart">💖</div>
@@ -445,6 +729,10 @@
     </div>
 
 
+    <!-- ==============================
+         JAVASCRIPT
+    ============================== -->
+
     <script>
 
         const symbols = ["♡", "♥", "💕", "✨"];
@@ -458,12 +746,14 @@
             heart.innerHTML =
                 symbols[Math.floor(Math.random() * symbols.length)];
 
-            heart.style.left = Math.random() * 100 + "%";
+            heart.style.left =
+                Math.random() * 100 + "%";
 
             heart.style.fontSize =
                 (12 + Math.random() * 18) + "px";
 
-            const duration = 8 + Math.random() * 8;
+            const duration =
+                8 + Math.random() * 8;
 
             heart.style.animationDuration =
                 duration + "s";
