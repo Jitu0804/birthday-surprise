@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>For You, With Love 💖</title>
 
     <style>
@@ -21,17 +20,15 @@
             min-height: 100vh;
             font-family: "Georgia", "Times New Roman", serif;
             color: #54253a;
-
-            background:
-                radial-gradient(circle at 15% 15%, rgba(255,255,255,.9), transparent 25%),
-                radial-gradient(circle at 85% 25%, rgba(255,210,225,.7), transparent 30%),
-                linear-gradient(135deg, #fff1f6, #ffe3ee, #f8d8e7);
-
             overflow-x: hidden;
+            background:
+                radial-gradient(circle at 15% 15%, rgba(255,255,255,.92), transparent 25%),
+                radial-gradient(circle at 85% 20%, rgba(255,215,230,.75), transparent 30%),
+                radial-gradient(circle at 30% 90%, rgba(255,235,245,.55), transparent 26%),
+                linear-gradient(135deg, #fff2f7, #ffe7f0, #f9d9e8);
         }
 
-        /* FLOATING HEARTS */
-
+        /* Floating Hearts */
         .heart {
             position: fixed;
             bottom: -50px;
@@ -39,43 +36,87 @@
             z-index: 0;
             opacity: 0;
             animation: floatHeart linear forwards;
+            filter: drop-shadow(0 3px 8px rgba(160, 65, 105, .18));
         }
 
         @keyframes floatHeart {
             0% {
-                transform: translateY(0) rotate(0deg);
+                transform: translateY(0) rotate(0deg) scale(.9);
                 opacity: 0;
             }
-
             10% {
-                opacity: .8;
+                opacity: .9;
             }
-
             90% {
-                opacity: .7;
+                opacity: .75;
             }
-
             100% {
-                transform: translateY(-110vh) rotate(360deg);
+                transform: translateY(-115vh) rotate(360deg) scale(1.15);
                 opacity: 0;
             }
         }
 
-        /* MAIN CONTAINER */
+        /* Background Glows */
+        .glow {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(10px);
+        }
+
+        .glow.one {
+            width: 220px;
+            height: 220px;
+            top: -70px;
+            left: -50px;
+            background: rgba(255, 190, 215, 0.28);
+        }
+
+        .glow.two {
+            width: 280px;
+            height: 280px;
+            right: -80px;
+            bottom: -90px;
+            background: rgba(255, 220, 235, 0.28);
+        }
 
         .page {
             position: relative;
             z-index: 2;
             width: 100%;
-            max-width: 850px;
+            max-width: 1050px;
             margin: auto;
-            padding: 30px 18px 70px;
+            padding: 28px 18px 80px;
         }
 
-        /* OPENING SECTION */
+        .section-card {
+            margin-top: 28px;
+            padding: 42px 34px;
+            background: rgba(255,255,255,.58);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,.82);
+            border-radius: 34px;
+            box-shadow:
+                0 20px 60px rgba(124,44,78,.14),
+                inset 0 1px 0 rgba(255,255,255,.55);
+        }
 
-        .top {
-            min-height: 92vh;
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: all .9s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Opening */
+        .opening {
+            min-height: 95vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -84,59 +125,42 @@
 
         .opening-card {
             width: 100%;
-            padding: 55px 30px;
-
-            background: rgba(255,255,255,.58);
+            max-width: 830px;
+            padding: 62px 40px;
+            background: rgba(255,255,255,.60);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
-
-            border: 1px solid rgba(255,255,255,.8);
-            border-radius: 35px;
-
-            box-shadow:
-                0 25px 70px rgba(124,44,78,.18);
-
-            animation: appear 1.2s ease;
+            border: 1px solid rgba(255,255,255,.82);
+            border-radius: 38px;
+            box-shadow: 0 25px 75px rgba(124,44,78,.16);
         }
 
-        @keyframes appear {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .emoji {
-            font-size: 48px;
+        .top-heart {
+            font-size: 42px;
             margin-bottom: 20px;
             animation: pulse 1.8s infinite;
         }
 
         @keyframes pulse {
             50% {
-                transform: scale(1.15);
+                transform: scale(1.12);
             }
         }
 
-        .small-title {
+        .kicker {
             font-family: Arial, sans-serif;
             text-transform: uppercase;
             letter-spacing: 4px;
             font-size: 11px;
             color: #a14d70;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
 
         h1 {
-            font-size: clamp(42px, 8vw, 70px);
+            font-size: clamp(40px, 7vw, 70px);
+            line-height: 1.08;
             font-weight: 500;
             color: #632c46;
-            line-height: 1.1;
         }
 
         h1 span {
@@ -145,60 +169,60 @@
         }
 
         .divider {
-            width: 80px;
+            width: 90px;
             height: 2px;
-            margin: 25px auto;
-            background: #c76b8d;
+            margin: 26px auto;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #c76b8d, #e8aac2);
         }
 
-        .subtitle {
+        .opening-text {
+            max-width: 720px;
+            margin: 0 auto;
             font-size: 18px;
-            line-height: 1.8;
-            color: #704258;
+            line-height: 1.95;
+            color: #6d4055;
         }
 
-        .scroll-text {
-            margin-top: 35px;
+        .opening-text strong {
+            color: #a14169;
+        }
+
+        .scroll-note {
+            margin-top: 28px;
             font-family: Arial, sans-serif;
             font-size: 12px;
             letter-spacing: 1px;
             color: #9a657b;
         }
 
-        /* MESSAGE CARD */
-
-        .message-card {
-            margin-top: 20px;
-            padding: 50px 38px;
-
-            background: rgba(255,255,255,.68);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-
-            border: 1px solid rgba(255,255,255,.85);
-            border-radius: 32px;
-
-            box-shadow:
-                0 20px 60px rgba(124,44,78,.15);
-        }
-
-        .message-heading {
+        /* Titles */
+        .section-head {
             text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: 28px;
         }
 
-        .message-heading .mini-heart {
-            font-size: 28px;
+        .section-icon {
+            font-size: 30px;
             margin-bottom: 12px;
         }
 
-        .message-heading h2 {
-            font-size: clamp(30px, 6vw, 45px);
+        .section-eyebrow {
+            font-family: Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 11px;
+            color: #a14d70;
+            margin-bottom: 10px;
+        }
+
+        .section-head h2 {
+            font-size: clamp(28px, 5vw, 42px);
             font-weight: 500;
             color: #632c46;
         }
 
-        .message-heading p {
+        .section-sub {
             margin-top: 10px;
             font-family: Arial, sans-serif;
             font-size: 13px;
@@ -206,503 +230,942 @@
             letter-spacing: 1px;
         }
 
-        .message-content {
+        .message-text {
             font-size: 18px;
             line-height: 2;
             color: #653b4d;
         }
 
-        .message-content p {
-            margin-bottom: 25px;
+        .message-text p {
+            margin-bottom: 22px;
         }
 
-        .highlight {
+        .quote-line {
+            margin: 28px 0;
+            padding: 22px 18px;
             text-align: center;
-            margin: 35px 0;
-            padding: 25px 20px;
-
-            border-top: 1px solid rgba(180,90,125,.25);
-            border-bottom: 1px solid rgba(180,90,125,.25);
-
+            border-top: 1px solid rgba(180,90,125,.22);
+            border-bottom: 1px solid rgba(180,90,125,.22);
             color: #a14169;
             font-size: 22px;
-            font-style: italic;
-        }
-
-        /* MEMORIES SECTION */
-
-        .memories {
-            margin-top: 35px;
-            padding: 50px 30px;
-
-            background: rgba(255,255,255,.58);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-
-            border: 1px solid rgba(255,255,255,.85);
-            border-radius: 32px;
-
-            box-shadow:
-                0 20px 60px rgba(124,44,78,.15);
-        }
-
-        .memories-heading {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-
-        .memories-heading .camera {
-            font-size: 32px;
-            margin-bottom: 12px;
-        }
-
-        .memories-heading h2 {
-            font-size: clamp(30px, 6vw, 44px);
-            font-weight: 500;
-            color: #632c46;
-        }
-
-        .memories-heading p {
-            margin-top: 12px;
-            font-family: Arial, sans-serif;
-            font-size: 13px;
-            color: #9a657b;
-            letter-spacing: 1px;
-        }
-
-        /* PHOTO GRID */
-
-        .photo-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 22px;
-        }
-
-        .photo-card {
-            position: relative;
-            overflow: hidden;
-
-            background: white;
-            padding: 9px 9px 15px;
-
-            border-radius: 14px;
-
-            box-shadow:
-                0 12px 30px rgba(105,45,70,.16);
-
-            transition:
-                transform .4s ease,
-                box-shadow .4s ease;
-        }
-
-        .photo-card:nth-child(1) {
-            transform: rotate(-2deg);
-        }
-
-        .photo-card:nth-child(2) {
-            transform: rotate(2deg);
-        }
-
-        .photo-card:nth-child(3) {
-            transform: rotate(1.5deg);
-        }
-
-        .photo-card:nth-child(4) {
-            transform: rotate(-1.5deg);
-        }
-
-        .photo-card:hover {
-            transform: translateY(-8px) rotate(0deg) scale(1.02);
-
-            box-shadow:
-                0 20px 40px rgba(105,45,70,.22);
-        }
-
-        .photo-card img {
-            display: block;
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
-
-            border-radius: 9px;
-        }
-
-        .photo-caption {
-            text-align: center;
-            padding-top: 12px;
-
-            font-size: 14px;
-            color: #7a465b;
-            font-style: italic;
-        }
-
-        /* MEMORY QUOTE */
-
-        .memory-quote {
-            margin-top: 38px;
-            text-align: center;
-
-            padding: 25px 15px;
-
-            border-top: 1px solid rgba(180,90,125,.25);
-            border-bottom: 1px solid rgba(180,90,125,.25);
-
-            color: #a14169;
-            font-size: 21px;
             line-height: 1.7;
             font-style: italic;
         }
 
-        /* ENDING */
+        .soft-note {
+            text-align: center;
+            max-width: 830px;
+            margin: 0 auto 28px;
+            font-size: 18px;
+            line-height: 1.9;
+            color: #6d4055;
+        }
 
+        /* Gallery */
+        .gallery {
+            display: grid;
+            gap: 22px;
+        }
+
+        .gallery-1 {
+            grid-template-columns: 1fr;
+            max-width: 560px;
+            margin: auto;
+        }
+
+        .gallery-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .gallery-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .gallery-4 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .gallery-5 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .gallery-6 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .final-gallery {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .final-gallery .photo-frame:nth-child(1) {
+            grid-column: span 2;
+        }
+
+        .final-gallery .photo-frame:nth-child(6) {
+            grid-column: span 2;
+        }
+
+        .photo-frame {
+            position: relative;
+            overflow: hidden;
+            background: #fff;
+            padding: 10px 10px 16px;
+            border-radius: 18px;
+            box-shadow: 0 16px 34px rgba(105,45,70,.14);
+            transition: transform .35s ease, box-shadow .35s ease;
+        }
+
+        .photo-frame:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 22px 42px rgba(105,45,70,.20);
+        }
+
+        .photo-frame img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .call-gallery .photo-frame img {
+            aspect-ratio: 10 / 16;
+        }
+
+        .birthday-gallery .photo-frame img,
+        .couple-gallery .photo-frame img {
+            aspect-ratio: 4 / 5;
+        }
+
+        .single-photo img,
+        .spotlight-photo img {
+            aspect-ratio: 4 / 5;
+        }
+
+        .photo-frame:nth-child(odd) {
+            transform: rotate(-1.5deg);
+        }
+
+        .photo-frame:nth-child(even) {
+            transform: rotate(1.5deg);
+        }
+
+        .photo-frame:hover:nth-child(odd),
+        .photo-frame:hover:nth-child(even) {
+            transform: translateY(-8px) rotate(0deg) scale(1.01);
+        }
+
+        figcaption {
+            text-align: center;
+            padding-top: 12px;
+            font-size: 14px;
+            line-height: 1.55;
+            color: #7a465b;
+            font-style: italic;
+        }
+
+        /* Special framed ending photos */
+        .magic-frame {
+            background:
+                linear-gradient(#fff, #fff) padding-box,
+                linear-gradient(135deg, #f5bfd2, #c86f93, #f5bfd2) border-box;
+            border: 2px solid transparent;
+        }
+
+        .magic-frame::after {
+            content: "✦";
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            font-size: 16px;
+            color: rgba(185, 78, 120, .72);
+        }
+
+        .final-line {
+            margin-top: 30px;
+            padding: 24px 18px;
+            text-align: center;
+            border-top: 1px solid rgba(180,90,125,.22);
+            border-bottom: 1px solid rgba(180,90,125,.22);
+            color: #a14169;
+            font-size: 23px;
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        /* Ending */
         .ending {
             text-align: center;
-            padding: 60px 20px 20px;
+            padding: 15px 10px 5px;
         }
 
         .ending-heart {
             font-size: 42px;
+            margin-bottom: 12px;
             animation: pulse 1.8s infinite;
         }
 
         .ending h2 {
-            margin-top: 18px;
             font-size: clamp(30px, 6vw, 48px);
             font-weight: 500;
             color: #632c46;
         }
 
         .ending p {
-            margin-top: 15px;
-            font-size: 17px;
-            line-height: 1.8;
-            color: #704258;
+            margin-top: 16px;
+            font-size: 18px;
+            line-height: 1.95;
+            color: #6d4055;
         }
 
         .signature {
-            margin-top: 30px;
-            font-size: 22px;
+            margin-top: 26px;
+            font-size: 24px;
             color: #a14169;
             font-style: italic;
         }
 
-        /* BACK BUTTON */
-
         .back {
             display: inline-block;
-            margin-top: 35px;
-            padding: 13px 25px;
-
+            margin-top: 34px;
+            padding: 14px 26px;
             border: 1px solid rgba(161,77,112,.35);
             border-radius: 30px;
-
             color: #8f315b;
             text-decoration: none;
-
             font-family: Arial, sans-serif;
             font-size: 13px;
-
             transition: .3s;
+            background: rgba(255,255,255,.28);
         }
 
         .back:hover {
-            background: rgba(255,255,255,.5);
+            background: rgba(255,255,255,.58);
             transform: translateY(-3px);
         }
 
-        /* MOBILE */
-
-        @media (max-width: 600px) {
-
-            .page {
-                padding: 18px 14px 50px;
+        /* Mobile */
+        @media (max-width: 900px) {
+            .gallery-5,
+            .gallery-6,
+            .final-gallery {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .opening-card {
-                padding: 45px 22px;
+            .final-gallery .photo-frame:nth-child(1),
+            .final-gallery .photo-frame:nth-child(6) {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .page {
+                padding: 18px 14px 55px;
+            }
+
+            .opening-card,
+            .section-card {
+                padding: 36px 22px;
                 border-radius: 28px;
             }
 
-            .message-card {
-                padding: 38px 22px;
-                border-radius: 26px;
-            }
-
-            .memories {
-                padding: 38px 18px;
-                border-radius: 26px;
-            }
-
-            .subtitle {
-                font-size: 16px;
-            }
-
-            .message-content {
+            .opening-text,
+            .message-text,
+            .soft-note,
+            .ending p {
                 font-size: 16px;
                 line-height: 1.9;
             }
 
-            .highlight {
+            .quote-line,
+            .final-line {
                 font-size: 19px;
             }
 
-            .photo-grid {
-                gap: 15px;
+            .gallery-2,
+            .gallery-3,
+            .gallery-4,
+            .gallery-5,
+            .gallery-6,
+            .final-gallery {
+                grid-template-columns: 1fr;
             }
 
-            .photo-card {
-                padding: 7px 7px 12px;
+            .photo-frame img,
+            .call-gallery .photo-frame img {
+                aspect-ratio: 4 / 5;
             }
 
-            .photo-caption {
-                font-size: 12px;
-                padding-top: 9px;
-            }
-
-            .memory-quote {
-                font-size: 18px;
+            figcaption {
+                font-size: 13px;
             }
         }
     </style>
 </head>
-
 <body>
 
-    <!-- Floating Hearts -->
+    <div class="glow one"></div>
+    <div class="glow two"></div>
 
+    <!-- Initial floating hearts -->
     <div class="heart" style="left:8%; animation-duration:9s;">♡</div>
-    <div class="heart" style="left:22%; animation-duration:12s;">♥</div>
-    <div class="heart" style="left:38%; animation-duration:10s;">♡</div>
-    <div class="heart" style="left:55%; animation-duration:13s;">💕</div>
-    <div class="heart" style="left:72%; animation-duration:11s;">♡</div>
-    <div class="heart" style="left:88%; animation-duration:14s;">♥</div>
+    <div class="heart" style="left:20%; animation-duration:12s;">♥</div>
+    <div class="heart" style="left:35%; animation-duration:10s;">💕</div>
+    <div class="heart" style="left:52%; animation-duration:13s;">♡</div>
+    <div class="heart" style="left:70%; animation-duration:11s;">✨</div>
+    <div class="heart" style="left:87%; animation-duration:14s;">♥</div>
 
     <div class="page">
 
-        <!-- OPENING -->
-
-        <section class="top">
-
+        <!-- Opening -->
+        <section class="opening reveal">
             <div class="opening-card">
+                <div class="top-heart">💖</div>
+                <div class="kicker">A birthday page made just for you</div>
 
-                <div class="emoji">🎂</div>
-
-                <div class="small-title">
-                    A Birthday Message
-                </div>
-
-                <h1>
-                    Happy <span>Birthday</span> ❤️
-                </h1>
+                <h1>Happiest Birthday, <span>Bakudi</span> ❤️</h1>
 
                 <div class="divider"></div>
 
-                <p class="subtitle">
-                    Today is your special day,
-                    and I wanted to make sure
-                    there was something here
-                    just for you. ✨
-                </p>
+                <div class="opening-text">
+                    <p>
+                        May God give you all the happiness in the world, and I pray
+                        that you achieve huge success in life. Babita, I promise
+                        I will always stand by your side. Even though I might not be
+                        able to meet you today or give you a surprise in person,
+                        I truly hope this message makes you feel special and brings
+                        a smile to your face.
+                    </p>
 
-                <div class="scroll-text">
-                    ↓ Keep scrolling ↓
+                    <p>
+                        In life, we all deserve to meet good people, experience good
+                        things, and create wonderful memories so that life goes
+                        smoothly. And since you are such a pure and straightforward
+                        person at heart, you deserve nothing less than the best.
+                    </p>
+
+                    <p>
+                        On your special day, I wanted to do something more than just
+                        wish you happy birthday — I wanted to share a glimpse of our
+                        most precious memories. A small journey of <strong>our story,
+                        from 2018 to 2026</strong>, filled with moments, feelings,
+                        smiles, mistakes, and memories that never left my heart.
+                    </p>
+
+                    <p>
+                        So please... stop replying to everyone else for just
+                        5 minutes and read this message carefully! ❤️🤌😂
+                    </p>
                 </div>
 
+                <div class="scroll-note">↓ Keep scrolling, beautiful ↓</div>
             </div>
-
         </section>
 
-        <!-- MESSAGE -->
-
-        <section class="message-card">
-
-            <div class="message-heading">
-
-                <div class="mini-heart">💗</div>
-
-                <h2>A Little Something For You</h2>
-
-                <p>READ THIS WITH A SMILE</p>
-
+        <!-- Our Story -->
+        <section class="section-card reveal">
+            <div class="section-head">
+                <div class="section-icon">📖</div>
+                <div class="section-eyebrow">Our Story</div>
+                <h2>2018 to 2026</h2>
+                <div class="section-sub">A story that still lives in my heart</div>
             </div>
 
-            <div class="message-content">
-
+            <div class="message-text">
                 <p>
-                    Dear Beautiful,
+                    Was this friendship? Brother-sister? Lovers? Fiancée?
+                    Or something else entirely? Honestly, I still feel that
+                    we were just two unknown people who looked at each other,
+                    and in that one moment not only our eyes, but our hearts,
+                    minds, and even our steps stopped right there.
                 </p>
 
                 <p>
-                    First of all, a very Happy Birthday to you! 🎂❤️
-                    I hope this beautiful day brings you countless
-                    reasons to smile and reminds you how special
-                    you truly are.
+                    It all goes back to 2018, when I saw you for the very first
+                    time in our village in Rajasthan. To be honest, the moment
+                    I saw you, everything went quiet. You looked straight into
+                    my eyes, and I thought, “Who is she? I have never seen such
+                    an apsara in the village before!” That day, something rang
+                    inside my heart, and I knew I wanted to talk to you.
                 </p>
 
                 <p>
-                    Sometimes there are people who become a beautiful
-                    part of our lives without even realizing how much
-                    they mean to us. And today felt like the perfect
-                    day to tell you that you are one of those people.
-                </p>
-
-                <div class="highlight">
-                    "Some people make ordinary moments feel like
-                    memories worth keeping forever." 💕
-                </div>
-
-                <p>
-                    I hope this new year of your life brings you
-                    happiness, peace, success, beautiful surprises,
-                    and everything your heart wishes for.
+                    Within a few days, we started talking. Every time I spoke
+                    with you, my heartbeat would rise, and inside I would feel
+                    a happiness that I still cannot explain properly. Your
+                    presence made me feel so light, so energetic, so alive.
+                    But maybe fate wanted to test us — because you came to
+                    Baroda, and our little chats were left behind within the
+                    four walls of that village. No contact, no meetings, no
+                    recognition. Whenever I went to the village, you were in
+                    Baroda; and whenever you went there, I was in Baroda.
+                    Our timing never seemed to support us.
                 </p>
 
                 <p>
-                    Keep smiling, keep being the wonderful person
-                    you are, and never forget that you deserve
-                    all the beautiful things life has to offer.
+                    But maybe God had decided that our incomplete story should
+                    not stay trapped inside those four walls forever. In 2020,
+                    we met again in the village at Kaka’s house. The happiness
+                    of that day had no limits — it felt like I had found a lost
+                    diamond again. I felt as if God had given me one more chance
+                    to come close to you and impress you.
                 </p>
 
                 <p>
-                    And yes... today you are officially allowed
-                    to eat as much cake as you want. 😄🎂
+                    During the 2020 lockdown, I put in so much effort to impress
+                    you. We played games together, watched TV shows, listened to
+                    songs, and such a beautiful vibe began growing between us.
+                    You could make me sit or stand with just one look from your
+                    eyes! I still remember telling you how cute your expressions
+                    were — and even today, that same face and those same eyes can
+                    still drive me crazy. I do not know why, but my heart always
+                    gravitates toward your face.
                 </p>
 
+                <p>
+                    As time passed, the distance between us slowly reduced.
+                    Holding hands while watching songs and shows, stealing those
+                    little moments, talking through risks — we were the ones
+                    taking risks right in front of everyone. And eventually,
+                    you were impressed... and you fell in love with me.
+                </p>
+
+                <p>
+                    Even today, I ask myself sometimes: Did we do the right thing
+                    back then? When you fell in love, did I truly feel love or
+                    was it just romance? In those days, both feelings looked the
+                    same to me, and I have carried that guilt for a long time.
+                    I have told you this many times too.
+                </p>
+
+                <p>
+                    Then came 2021, 2022, and 2023. Our conversations happened,
+                    but many times it felt like they were one-sided. You put in
+                    so much effort, and I stayed careless. You tolerated so much
+                    and still stayed. You knew that maybe I was immature and
+                    selfish, and yet your wish was so simple — you only wanted
+                    me to talk to you with love.
+                </p>
+
+                <p>
+                    And still, whenever you talked about leaving, I swear the
+                    ground would slip from under my feet. My head would spin,
+                    my heart would get restless, and I would panic from inside:
+                    “Will you really leave me? Why?” In those moments, I would
+                    realize how much tension I feel whenever the thought of
+                    losing you comes near — and that is when so much love for you
+                    would rise in my heart all at once.
+                </p>
             </div>
 
+            <div class="quote-line">
+                “Some stories are never defined by a single name...
+                they are simply felt, deeply and forever.” 💗
+            </div>
         </section>
 
-        <!-- MEMORIES / PHOTOS -->
-
-        <section class="memories">
-
-            <div class="memories-heading">
-
-                <div class="camera">📸</div>
-
-                <h2>A Few Memories</h2>
-
-                <p>
-                    MOMENTS WORTH KEEPING
-                </p>
-
-            <div class="photo-card">
-    <img src="./photo1.jpg" alt="Memory photo">
-
-    <div class="photo-caption">
-        A beautiful moment ♡
-    </div>
-</div>
-
-                <!-- PHOTO 2 -->
-
-                <div class="photo-card">
-
-                    <img
-                        src="https://picsum.photos/seed/birthday2/600/600"
-                        alt="Beautiful memory"
-                    >
-
-                    <div class="photo-caption">
-                        A memory to remember ✨
-                    </div>
-
-                </div>
-
-                <!-- PHOTO 3 -->
-
-                <div class="photo-card">
-
-                    <img
-                        src="https://picsum.photos/seed/birthday3/600/600"
-                        alt="Beautiful memory"
-                    >
-
-                    <div class="photo-caption">
-                        Moments like these 💕
-                    </div>
-
-                </div>
-
-                <!-- PHOTO 4 -->
-
-                <div class="photo-card">
-
-                    <img
-                        src="https://picsum.photos/seed/birthday4/600/600"
-                        alt="Beautiful memory"
-                    >
-
-                    <div class="photo-caption">
-                        Forever a special memory ❤️
-                    </div>
-
-                </div>
-
+        <!-- Photo 1 -->
+        <section class="section-card reveal">
+            <div class="section-head">
+                <div class="section-icon">🌷</div>
+                <div class="section-eyebrow">A favorite forever</div>
+                <h2>The Smile That Stays With Me</h2>
+                <div class="section-sub">One photo, endless peace</div>
             </div>
 
-            <div class="memory-quote">
-
-                "The best memories are the ones
-                we never planned to make." 💗
-
-            </div>
-
-        </section>
-
-        <!-- ENDING -->
-
-        <section class="ending">
-
-            <div class="ending-heart">💖</div>
-
-            <h2>Once Again, Happy Birthday!</h2>
-
-            <p>
-                May your smile stay this beautiful,
-                your heart stay this pure,
-                and your life always be filled
-                with beautiful moments.
+            <p class="soft-note">
+                And do you remember this picture? It has remained in my all-time
+                favorites ever since. I don’t know what it is about it, but the
+                kind of peace I get just by looking at this photo is unmatched.
+                Look at that cute smile, and how happy you look here! ❤️🫶
             </p>
 
-            <div class="signature">
-                With lots of love & best wishes ♡
+            <div class="gallery gallery-1">
+                <figure class="photo-frame single-photo">
+                    <img src="photo1.jpg" alt="photo1" loading="lazy">
+                    <figcaption>That smile gives me peace every single time. ❤️</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Photos 2-6 -->
+        <section class="section-card reveal">
+            <div class="section-head">
+                <div class="section-icon">📱</div>
+                <div class="section-eyebrow">Video call memories</div>
+                <h2>The Happiness On My Screen</h2>
+                <div class="section-sub">Little screenshots, big feelings</div>
             </div>
 
-            <a href="index.html" class="back">
-                ← Back to Home
-            </a>
+            <p class="soft-note">
+                I do love you so much, hhh... but what kind of love is this?
+                Honestly, I still don’t have the answer to your question.
+                But looking at these video calls, doesn’t it feel like I was
+                genuinely so happy? With all the stress of responsibilities
+                and studies, many things faded — but these screenshots still
+                remind me of how happy I used to be just being with you. 🫶❤️
+            </p>
 
+            <div class="gallery gallery-5 call-gallery">
+                <figure class="photo-frame">
+                    <img src="photo2.jpg" alt="photo2" loading="lazy">
+                    <figcaption>One call was enough to brighten everything.</figcaption>
+                </figure>
+
+                <figure class="photo-frame">
+                    <img src="photo3.jpg" alt="photo3" loading="lazy">
+                    <figcaption>Happiness sometimes lived inside a screen.</figcaption>
+                </figure>
+
+                <figure class="photo-frame">
+                    <img src="photo4.jpg" alt="photo4" loading="lazy">
+                    <figcaption>Just seeing you made the day feel lighter.</figcaption>
+                </figure>
+
+                <figure class="photo-frame">
+                    <img src="photo5.jpg" alt="photo5" loading="lazy">
+                    <figcaption>These little screenshots kept big feelings alive.</figcaption>
+                </figure>
+
+                <figure class="photo-frame">
+                    <img src="photo6.jpg" alt="photo6" loading="lazy">
+                    <figcaption>Our calls were simple, but never ordinary. ❤️</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Photos 7-10 -->
+        <section class="section-card reveal">
+            <div class="section-head">
+                <div class="section-icon">✨</div>
+                <div class="section-eyebrow">Beautiful you</div>
+                <h2>Impossible To Forget</h2>
+                <div class="section-sub">No matter what you wear, you shine</div>
+            </div>
+
+            <p class="soft-note">
+                Come on, I try so hard to forget you, Bakudi, but whenever such
+                photos of yours pop up, it feels like forgetting you is just
+                impossible! And seriously, no matter what clothes you wear, it
+                feels like they were specially made just for you. Look at these
+                photos — you look so amazing! This message feels like a short
+                excuse just to look at your photos more, 😂❤️🤌 but honestly,
+                more than how gorgeous you look on the outside, you are even
+                more wonderful from the heart. ❤️
+            </p>
+
+            <div class="gallery gallery-4">
+                <figure class="photo-frame">
+                    <img src="photo7.jpg" alt="photo7" loading="lazy">
+                    <figcaption>Forgetting you? Clearly impossible.</figcaption>
+                </figure>
+
+                <figure class="photo-frame">
+                    <img src="photo8.jpg" alt="photo8" loading="lazy">
+                    <figcaption>Every outfit somehow looked made for you.</figcaption>
+                </figure>
+
+                <figure class="photo-frame">
+                    <img src="photo9.jpg" alt="photo9" loading="lazy">
+                    <figcaption>Pretty outside, and even more beautiful inside.</figcaption>
+                </figure>
+
+                <figure class="photo-frame">
+                    <img src="photo10.jpg" alt="photo10" loading="lazy">
+                    <figcaption>This page is also an excuse to admire you more. ❤️</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Photos 11-12 -->
+        <section class="section-card reveal">
+            <div class="section-head">
+                <div class="section-icon">🤝</div>
+                <div class="section-eyebrow">Us</div>
+                <h2>A Hand I Never Wanted To Leave</h2>
+                <div class="section-sub">Some grips feel like forever</div>
+            </div>
+
+            <p class="soft-note">
+                That’s it — just looking at these photos and sharing these talks,
+                I was ready to hold your hand and walk away forever. It felt like
+                our grip on each other’s hands was so tight that no one could
+                ever break it. I used to dream of traveling the whole world
+                holding this hand. 🙂❤️ This is that kind of hand which I never
+                feel like letting go of once I hold it. But what is the use of
+                just talking about it? Efforts matter... and I could never manage
+                to come forward enough in that race of efforts.
+            </p>
+
+            <div class="gallery gallery-2">
+                <figure class="photo-frame">
+                    <img src="photo11.jpg" alt="photo11" loading="lazy">
+                    <figcaption>A hand that felt like home.</figcaption>
+                </figure>
+
+                <figure class="photo-frame">
+                    <img src="photo12.jpg" alt="photo12" loading="lazy">
+                    <figcaption>I could have walked the whole world like this. ❤️</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Photos 13-15 -->
+        <section class="section-card reveal">
+            <div class="section-head">
+                <div class="section-icon">💎</div>
+                <div class="section-eyebrow">Earrings story</div>
+                <h2>Beauty, Doubled</h2>
+                <div class="section-sub">Some things suit you too perfectly</div>
+            </div>
+
+            <p class="soft-note">
+                I always used to think that when Bakudi stays with me, I will buy
+                her one-by-one the most expensive earrings, because these earrings
+                just double your beauty! You look so amazing in these pictures,
+                🥹🤌🫶 Whether you talk to me or not, in the future, I am definitely
+                going to bring those earrings for you! 🥹❤️
+            </p>
+
+            <div class="gallery gallery-3">
+                <figure class="photo-frame">
+                    <img src="photo13.jpg" alt="photo13" loading="lazy">
+                    <figcaption>Earrings and you — such a perfect combination.</figcaption>
+                </figure>
+
+                <figure class="photo-frame">
+                    <img src="photo14.jpg" alt="photo14" loading="lazy">
+                    <figcaption>You make every little sparkle look grand.</figcaption>
+                </figure>
+
+                <figure class="photo-frame">
+                    <img src="photo15.jpg" alt="photo15" loading="lazy">
+                    <figcaption>Honestly, these just make you shine even more. ✨</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Photo 16 -->
+        <section class="section-card reveal">
+            <div class="section-head">
+                <div class="section-icon">😄</div>
+                <div class="section-eyebrow">One unexpected chapter</div>
+                <h2>The “Madam” Entry</h2>
+                <div class="section-sub">A playful thought, a serious lesson</div>
+            </div>
+
+            <p class="soft-note">
+                You must be thinking, “Where did this madam suddenly pop up in the
+                story?” 😂 But listen, if we had taken a risk like this madam did,
+                maybe we would have stayed together in the future too. She dared
+                to do it once... and now she is happy in her own life. 🫶
+                Obviously, you will say that you were ready at that time, but we
+                kept thinking so much about our parents — so yes, we are also
+                good children! ❤️😚 Mumma is so proud of us. ❤️🫶
+            </p>
+
+            <div class="gallery gallery-1">
+                <figure class="photo-frame spotlight-photo">
+                    <img src="photo16.jpg" alt="photo16" loading="lazy">
+                    <figcaption>Sometimes courage writes a completely different story.</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Photos 17-22 -->
+        <section class="section-card reveal">
+            <div class="section-head">
+                <div class="section-icon">💑</div>
+                <div class="section-eyebrow">Couple memories</div>
+                <h2>We Really Did Look Beautiful Together</h2>
+                <div class="section-sub">But relationships need effort too</div>
+            </div>
+
+            <p class="soft-note">
+                By the way, these photos weren’t even necessary, because as usual,
+                I start doubting my own looks when I am standing next to you 😂😂
+                You are so gorgeous that I start doubting myself, and that is why
+                I searched so hard today to find some good photos of us! 😂🫶
+                Now you tell me, would anyone ever want to leave such a wonderful
+                partner? Absolutely not..... I would literally start dancing to
+                your slightest hints! ❤️😚 We look amazing together, but to make
+                a relationship work, it takes good efforts, not just looking good...
+                and once again, I lost. 🥹💔
+            </p>
+
+            <div class="gallery gallery-6 couple-gallery">
+                <figure class="photo-frame">
+                    <img src="photo17.jpg" alt="photo17" loading="lazy">
+                    <figcaption>One frame, and my confidence disappears. 😂</figcaption>
+                </figure>
+
+                <figure class="photo-frame">
+                    <img src="photo18.jpg" alt="photo18" loading="lazy">
+                    <figcaption>You looked too good beside me, as always.</figcaption>
+                </figure>
+
+                <figure class="photo-frame">
+                    <img src="photo19.jpg" alt="photo19" loading="lazy">
+                    <figcaption>How were we this cute together?</figcaption>
+                </figure>
+
+                <figure class="photo-frame">
+                    <img src="photo20.jpg" alt="photo20" loading="lazy">
+                    <figcaption>These are the kind of memories that stay.</figcaption>
+                </figure>
+
+                <figure class="photo-frame">
+                    <img src="photo21.jpg" alt="photo21" loading="lazy">
+                    <figcaption>Anyone would be lucky to have a partner like you.</figcaption>
+                </figure>
+
+                <figure class="photo-frame">
+                    <img src="photo22.jpg" alt="photo22" loading="lazy">
+                    <figcaption>We looked amazing... and I still feel that. ❤️</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Photos 23-24 -->
+        <section class="section-card reveal">
+            <div class="section-head">
+                <div class="section-icon">🎉</div>
+                <div class="section-eyebrow">Birthday memory</div>
+                <h2>Your Surprise, My Treasure</h2>
+                <div class="section-sub">Love is shown through effort</div>
+            </div>
+
+            <p class="soft-note">
+                This was probably the first and last birthday that I celebrated
+                so nicely with you. And one thing I realized is that money isn’t
+                everything — it takes real effort to keep a relationship good.
+                Today I might have money in my pocket, but I can’t celebrate your
+                birthday with you in person, and back then, even when you didn’t
+                have much balance, you still gave me such an amazing surprise on
+                my birthday. It felt so, so special.
+            </p>
+
+            <p class="soft-note">
+                One thing is for sure: to love someone or to show it, you don’t
+                need money; you just need efforts and a true desire. ❤️🫶
+                But still, thank you so much for that birthday surprise of mine. ❤️❤️
+            </p>
+
+            <div class="gallery gallery-2 birthday-gallery">
+                <figure class="photo-frame">
+                    <img src="photo23.jpg" alt="photo23" loading="lazy">
+                    <figcaption>That surprise still feels special in my heart.</figcaption>
+                </figure>
+
+                <figure class="photo-frame">
+                    <img src="photo24.jpg" alt="photo24" loading="lazy">
+                    <figcaption>Your effort meant more than anything money could buy.</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Photos 25-28 -->
+        <section class="section-card reveal">
+            <div class="section-head">
+                <div class="section-icon">🌺</div>
+                <div class="section-eyebrow">Saree moments</div>
+                <h2>Out Of My League, Truly</h2>
+                <div class="section-sub">Grace that is impossible to handle</div>
+            </div>
+
+            <p class="soft-note">
+                That’s more than enough to make me feel guilty that I lost a diamond
+                who was way out of my league... But no, you are still going to dress
+                up like this, right? Please, don’t come in front of me wearing a saree
+                like this anymore! 🥹🥹😐😐 I just can’t handle it. 🥹
+            </p>
+
+            <div class="gallery gallery-4">
+                <figure class="photo-frame">
+                    <img src="photo25.jpg" alt="photo25" loading="lazy">
+                    <figcaption>This saree look is simply dangerous for my heart.</figcaption>
+                </figure>
+
+                <figure class="photo-frame">
+                    <img src="photo26.jpg" alt="photo26" loading="lazy">
+                    <figcaption>Grace, elegance, and you — what a combination.</figcaption>
+                </figure>
+
+                <figure class="photo-frame">
+                    <img src="photo27.jpg" alt="photo27" loading="lazy">
+                    <figcaption>I really am not strong enough for this look. 🥹</figcaption>
+                </figure>
+
+                <figure class="photo-frame">
+                    <img src="photo28.jpg" alt="photo28" loading="lazy">
+                    <figcaption>A diamond far beyond my league. 💖</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Photo 29 -->
+        <section class="section-card reveal">
+            <div class="section-head">
+                <div class="section-icon">😏</div>
+                <div class="section-eyebrow">Jealousy chapter</div>
+                <h2>Yes, I Got Jealous</h2>
+                <div class="section-sub">Even if they are just friends 😭</div>
+            </div>
+
+            <p class="soft-note">
+                And keep some distance while walking, ho! 😏😏😏 No one gets as
+                jealous as I do. Just making sure no sweet-talking guy tries to
+                take away such a wonderful girl, so stay away from everyone!
+                Even if they are your friends, I still feel jealous, you know! 😭😭
+            </p>
+
+            <div class="gallery gallery-1">
+                <figure class="photo-frame">
+                    <img src="photo29.jpg" alt="photo29" loading="lazy">
+                    <figcaption>And yes... I was definitely jealous here too. 😭❤️</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Photo 30 -->
+        <section class="section-card reveal">
+            <div class="section-head">
+                <div class="section-icon">🍔</div>
+                <div class="section-eyebrow">Pinky promise</div>
+                <h2>Food Date Promise</h2>
+                <div class="section-sub">Burger, dabeli, pani puri and more</div>
+            </div>
+
+            <p class="soft-note">
+                And if you stay away from everyone, I promise I will take you out
+                to eat burgers, dabeli, panipuri, pizza, french fries, sandwiches,
+                or veg momos — for sure! Pinky promise ❤️😁
+            </p>
+
+            <div class="gallery gallery-1">
+                <figure class="photo-frame">
+                    <img src="photo30.jpg" alt="photo30" loading="lazy">
+                    <figcaption>Pinky promise — one food date is always pending. 🍟❤️</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Photos 31-37 -->
+        <section class="section-card reveal">
+            <div class="section-head">
+                <div class="section-icon">👑</div>
+                <div class="section-eyebrow">The final gallery</div>
+                <h2>Too Beautiful For My Peace Of Mind</h2>
+                <div class="section-sub">And now I am definitely not in my senses anymore</div>
+            </div>
+
+            <p class="soft-note">
+                Wasn’t it already enough that you are so special to me, that now
+                you had to send me these photos too? Seriously, I would leave
+                everything for you! Yarr, who gets ready looking this gorgeous?
+                You are so, so special to me, Babita, and you always will be —
+                forever and ever.
+            </p>
+
+            <p class="soft-note">
+                I will try my best so that we don’t just stay together, but stay
+                together the right way, so that we remain happy and healthy too. ❤️
+                And now, go ahead and look at these photos of yours — after seeing
+                them, I am definitely not in my senses anymore! 💯❤️
+            </p>
+
+            <div class="gallery final-gallery">
+                <figure class="photo-frame magic-frame">
+                    <img src="photo31.jpg" alt="photo31" loading="lazy">
+                    <figcaption>You really know how to stop time with one look.</figcaption>
+                </figure>
+
+                <figure class="photo-frame magic-frame">
+                    <img src="photo32.jpg" alt="photo32" loading="lazy">
+                    <figcaption>One more reason my heart forgets how to behave.</figcaption>
+                </figure>
+
+                <figure class="photo-frame magic-frame">
+                    <img src="photo33.jpg" alt="photo33" loading="lazy">
+                    <figcaption>How can one person be this beautiful?</figcaption>
+                </figure>
+
+                <figure class="photo-frame magic-frame">
+                    <img src="photo34.jpg" alt="photo34" loading="lazy">
+                    <figcaption>Pure charm. Pure grace. Pure trouble for me. ❤️</figcaption>
+                </figure>
+
+                <figure class="photo-frame magic-frame">
+                    <img src="photo35.jpg" alt="photo35" loading="lazy">
+                    <figcaption>Some photos deserve only one response: wow.</figcaption>
+                </figure>
+
+                <figure class="photo-frame magic-frame">
+                    <img src="photo36.jpg" alt="photo36" loading="lazy">
+                    <figcaption>I am still not over this one... and I won’t be soon.</figcaption>
+                </figure>
+
+                <figure class="photo-frame magic-frame">
+                    <img src="photo37.jpg" alt="photo37" loading="lazy">
+                    <figcaption>Forever special, forever beautiful, forever you. 💖</figcaption>
+                </figure>
+            </div>
+
+            <div class="final-line">
+                “If beauty had a calm heart, a pure soul, and a smile full of light...
+                maybe it would look a little like you.” ✨
+            </div>
+        </section>
+
+        <!-- Ending -->
+        <section class="section-card reveal">
+            <div class="ending">
+                <div class="ending-heart">💝</div>
+                <h2>Happy Birthday Once Again</h2>
+
+                <p>
+                    Happy birthday once again, Bakudi. And I am sorry for any
+                    mistakes I made in these 7–8 years. Thank you for always
+                    standing with me and loving me in a way no one else ever could.
+                </p>
+
+                <p>
+                    No matter what happens, one truth will always remain:
+                    you are deeply special to me, and you always will be.
+                    I truly pray that your life is filled with happiness,
+                    health, peace, success, and endless smiles. ❤️
+                </p>
+
+                <p>
+                    May every year of your life bring you more confidence,
+                    more joy, and more beautiful moments than the last.
+                    And may today remind you of one thing very clearly —
+                    you are loved, cherished, and unforgettable. 🫶
+                </p>
+
+                <div class="signature">
+                    With lots of love & best wishes ♡
+                </div>
+
+                <a href="index.html" class="back">← Back to Home</a>
+            </div>
         </section>
 
     </div>
 
-    <!-- JAVASCRIPT -->
-
     <script>
-
-        const symbols = ["♡", "♥", "💕", "✨"];
+        // Floating Hearts
+        const heartSymbols = ["♡", "♥", "💕", "✨", "💗"];
 
         function createHeart() {
-
             const heart = document.createElement("div");
-
             heart.className = "heart";
+            heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            heart.style.left = Math.random() * 100 + "%";
+            heart.style.fontSize = (12 + Math.random() * 18) + "px";
 
-            heart.innerHTML =
-                symbols[Math.floor(Math.random() * symbols.length)];
-
-            heart.style.left =
-                Math.random() * 100 + "%";
-
-            heart.style.fontSize =
-                (12 + Math.random() * 18) + "px";
-
-            const duration =
-                8 + Math.random() * 8;
-
-            heart.style.animationDuration =
-                duration + "s";
+            const duration = 8 + Math.random() * 8;
+            heart.style.animationDuration = duration + "s";
 
             document.body.appendChild(heart);
 
@@ -713,6 +1176,20 @@
 
         setInterval(createHeart, 1100);
 
+        // Reveal on scroll
+        const reveals = document.querySelectorAll(".reveal");
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                }
+            });
+        }, {
+            threshold: 0.12
+        });
+
+        reveals.forEach((item) => observer.observe(item));
     </script>
 
 </body>
