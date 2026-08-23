@@ -133,15 +133,20 @@ body {
 ============================================================ */
 
 .reveal {
-    opacity: 0;
-    transform: translateY(35px);
+    opacity: 1;
+    transform: translateY(0);
 
     transition:
         opacity .9s ease,
         transform .9s ease;
 }
 
-.reveal.visible {
+.js-enabled .reveal {
+    opacity: 0;
+    transform: translateY(35px);
+}
+
+.js-enabled .reveal.visible {
     opacity: 1;
     transform: translateY(0);
 }
