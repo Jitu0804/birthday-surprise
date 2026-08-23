@@ -1,32 +1,1702 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>For You, With Love 💖</title>
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+
+            font-family: "Georgia", "Times New Roman", serif;
+            color: #54253a;
+
+            background:
+                radial-gradient(circle at 15% 15%, rgba(255,255,255,.95), transparent 25%),
+                radial-gradient(circle at 85% 20%, rgba(255,205,225,.65), transparent 30%),
+                radial-gradient(circle at 20% 80%, rgba(255,225,238,.65), transparent 30%),
+                linear-gradient(135deg, #fff4f8, #ffe4ef, #f7d6e5);
+        }
+
+
+        /* =====================================================
+           BACKGROUND DECORATION
+        ===================================================== */
+
+        .blob {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(4px);
+        }
+
+        .blob.one {
+            width: 240px;
+            height: 240px;
+            top: -100px;
+            left: -80px;
+            background: rgba(255,180,210,.28);
+        }
+
+        .blob.two {
+            width: 320px;
+            height: 320px;
+            right: -130px;
+            bottom: -120px;
+            background: rgba(255,210,228,.30);
+        }
+
+
+        /* =====================================================
+           FLOATING HEARTS
+        ===================================================== */
+
+        .heart {
+            position: fixed;
+            bottom: -60px;
+            z-index: 1;
+
+            pointer-events: none;
+
+            opacity: 0;
+
+            animation: floatingHeart linear forwards;
+
+            filter:
+                drop-shadow(0 4px 7px rgba(150,60,95,.15));
+        }
+
+        @keyframes floatingHeart {
+
+            0% {
+                transform:
+                    translateY(0)
+                    rotate(0deg)
+                    scale(.85);
+
+                opacity: 0;
+            }
+
+            10% {
+                opacity: .75;
+            }
+
+            90% {
+                opacity: .65;
+            }
+
+            100% {
+                transform:
+                    translateY(-115vh)
+                    rotate(360deg)
+                    scale(1.2);
+
+                opacity: 0;
+            }
+        }
+
+
+        /* =====================================================
+           MAIN PAGE
+        ===================================================== */
+
+        .page {
+            position: relative;
+            z-index: 2;
+
+            width: 100%;
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding:
+                25px 18px
+                80px;
+        }
+
+
+        /* =====================================================
+           REVEAL ANIMATION
+        ===================================================== */
+
+        .reveal {
+            opacity: 0;
+
+            transform:
+                translateY(35px);
+
+            transition:
+                opacity .9s ease,
+                transform .9s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+
+        /* =====================================================
+           OPENING
+        ===================================================== */
+
+        .opening {
+            min-height: 96vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+        }
+
+        .opening-card {
+            width: 100%;
+            max-width: 880px;
+
+            padding:
+                68px
+                45px;
+
+            background:
+                rgba(255,255,255,.60);
+
+            backdrop-filter:
+                blur(20px);
+
+            -webkit-backdrop-filter:
+                blur(20px);
+
+            border:
+                1px solid
+                rgba(255,255,255,.9);
+
+            border-radius:
+                40px;
+
+            box-shadow:
+                0 30px 85px
+                rgba(119,40,76,.16);
+        }
+
+        .birthday-icon {
+            font-size: 46px;
+
+            margin-bottom:
+                18px;
+
+            animation:
+                pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,100% {
+                transform:
+                    scale(1);
+            }
+
+            50% {
+                transform:
+                    scale(1.13);
+            }
+        }
+
+        .tiny-title {
+            font-family:
+                Arial,
+                sans-serif;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                4px;
+
+            font-size:
+                11px;
+
+            color:
+                #a14d70;
+
+            margin-bottom:
+                20px;
+        }
+
+        h1 {
+            font-size:
+                clamp(
+                    42px,
+                    7vw,
+                    74px
+                );
+
+            font-weight:
+                500;
+
+            color:
+                #632c46;
+
+            line-height:
+                1.08;
+        }
+
+        h1 span {
+            color:
+                #bd527c;
+
+            font-style:
+                italic;
+        }
+
+        .divider {
+            width:
+                90px;
+
+            height:
+                2px;
+
+            margin:
+                28px auto;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    #bf6084,
+                    transparent
+                );
+        }
+
+        .opening-message {
+            max-width:
+                750px;
+
+            margin:
+                auto;
+
+            font-size:
+                18px;
+
+            line-height:
+                1.95;
+
+            color:
+                #6c4054;
+        }
+
+        .opening-message p {
+            margin-bottom:
+                20px;
+        }
+
+        .opening-message strong {
+            color:
+                #9c4266;
+        }
+
+        .scroll-down {
+            margin-top:
+                32px;
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                12px;
+
+            letter-spacing:
+                1px;
+
+            color:
+                #9b687c;
+        }
+
+
+        /* =====================================================
+           GENERAL STORY CARD
+        ===================================================== */
+
+        .story-card {
+            margin-top:
+                35px;
+
+            padding:
+                50px
+                42px;
+
+            border-radius:
+                36px;
+
+            background:
+                rgba(255,255,255,.62);
+
+            backdrop-filter:
+                blur(18px);
+
+            -webkit-backdrop-filter:
+                blur(18px);
+
+            border:
+                1px solid
+                rgba(255,255,255,.9);
+
+            box-shadow:
+                0 22px 65px
+                rgba(119,40,76,.13);
+        }
+
+        .section-heading {
+            text-align:
+                center;
+
+            margin-bottom:
+                35px;
+        }
+
+        .section-icon {
+            font-size:
+                32px;
+
+            margin-bottom:
+                10px;
+        }
+
+        .eyebrow {
+            font-family:
+                Arial,
+                sans-serif;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                3px;
+
+            font-size:
+                11px;
+
+            color:
+                #a14d70;
+
+            margin-bottom:
+                10px;
+        }
+
+        .section-heading h2 {
+            font-size:
+                clamp(
+                    30px,
+                    5vw,
+                    46px
+                );
+
+            font-weight:
+                500;
+
+            color:
+                #632c46;
+        }
+
+        .section-heading p {
+            margin-top:
+                10px;
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                13px;
+
+            letter-spacing:
+                1px;
+
+            color:
+                #987083;
+        }
+
+        .story-text {
+            font-size:
+                18px;
+
+            line-height:
+                2;
+
+            color:
+                #654052;
+        }
+
+        .story-text p {
+            margin-bottom:
+                24px;
+        }
+
+        .big-quote {
+            margin:
+                35px 0
+                5px;
+
+            padding:
+                28px
+                20px;
+
+            text-align:
+                center;
+
+            border-top:
+                1px solid
+                rgba(180,90,125,.23);
+
+            border-bottom:
+                1px solid
+                rgba(180,90,125,.23);
+
+            font-size:
+                22px;
+
+            line-height:
+                1.7;
+
+            color:
+                #a14169;
+
+            font-style:
+                italic;
+        }
+
+
+        /* =====================================================
+           PHOTO SECTION COMMON
+        ===================================================== */
+
+        .photo-section {
+            margin-top:
+                38px;
+
+            padding:
+                52px
+                38px;
+
+            background:
+                rgba(255,255,255,.58);
+
+            backdrop-filter:
+                blur(18px);
+
+            -webkit-backdrop-filter:
+                blur(18px);
+
+            border:
+                1px solid
+                rgba(255,255,255,.9);
+
+            border-radius:
+                36px;
+
+            box-shadow:
+                0 22px 65px
+                rgba(119,40,76,.13);
+        }
+
+        .section-message {
+            max-width:
+                900px;
+
+            margin:
+                0 auto
+                32px;
+
+            text-align:
+                center;
+
+            font-size:
+                18px;
+
+            line-height:
+                1.95;
+
+            color:
+                #684153;
+        }
+
+        figure {
+            margin:
+                0;
+        }
+
+        .frame {
+            overflow:
+                hidden;
+
+            background:
+                white;
+
+            padding:
+                10px
+                10px
+                16px;
+
+            border-radius:
+                18px;
+
+            box-shadow:
+                0 15px 38px
+                rgba(105,45,70,.15);
+
+            transition:
+                transform .4s ease,
+                box-shadow .4s ease;
+        }
+
+        .frame:hover {
+            transform:
+                translateY(-8px)
+                scale(1.01);
+
+            box-shadow:
+                0 24px 48px
+                rgba(105,45,70,.22);
+        }
+
+        .frame img {
+            display:
+                block;
+
+            width:
+                100%;
+
+            object-fit:
+                cover;
+
+            border-radius:
+                12px;
+        }
+
+        figcaption {
+            padding-top:
+                12px;
+
+            text-align:
+                center;
+
+            font-size:
+                14px;
+
+            line-height:
+                1.55;
+
+            color:
+                #76475b;
+
+            font-style:
+                italic;
+        }
+
+
+        /* =====================================================
+           PHOTO 1 HERO MEMORY
+        ===================================================== */
+
+        .hero-memory {
+            max-width:
+                670px;
+
+            margin:
+                auto;
+        }
+
+        .hero-photo-wrap {
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+            border-radius:
+                28px;
+
+            padding:
+                10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #f8d2e1
+                );
+
+            box-shadow:
+                0 25px 60px
+                rgba(112,42,74,.22);
+        }
+
+        .hero-photo-wrap img {
+            display:
+                block;
+
+            width:
+                100%;
+
+            max-height:
+                760px;
+
+            object-fit:
+                cover;
+
+            border-radius:
+                21px;
+        }
+
+        .hero-photo-overlay {
+            position:
+                absolute;
+
+            left:
+                22px;
+
+            right:
+                22px;
+
+            bottom:
+                22px;
+
+            padding:
+                24px;
+
+            border-radius:
+                20px;
+
+            background:
+                rgba(70,25,46,.47);
+
+            backdrop-filter:
+                blur(8px);
+
+            -webkit-backdrop-filter:
+                blur(8px);
+
+            color:
+                white;
+
+            text-align:
+                center;
+        }
+
+        .hero-photo-overlay span {
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                11px;
+
+            letter-spacing:
+                2px;
+
+            text-transform:
+                uppercase;
+        }
+
+        .hero-photo-overlay h3 {
+            margin-top:
+                8px;
+
+            font-weight:
+                400;
+
+            font-size:
+                clamp(
+                    19px,
+                    3vw,
+                    27px
+                );
+
+            line-height:
+                1.45;
+        }
+
+
+        /* =====================================================
+           VIDEO CALL PHOTOS 2-6
+        ===================================================== */
+
+        .video-layout {
+            display:
+                grid;
+
+            grid-template-columns:
+                1.25fr 1fr;
+
+            gap:
+                22px;
+
+            align-items:
+                stretch;
+        }
+
+        .video-main .frame,
+        .video-main img {
+            height:
+                100%;
+        }
+
+        .video-main img {
+            aspect-ratio:
+                9 / 15;
+
+            object-fit:
+                cover;
+        }
+
+        .video-small-grid {
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                18px;
+        }
+
+        .video-small-grid img {
+            aspect-ratio:
+                9 / 15;
+        }
+
+
+        /* =====================================================
+           PHOTOS 7-10 EDITORIAL GRID
+        ===================================================== */
+
+        .editorial-grid {
+            display:
+                grid;
+
+            grid-template-columns:
+                1.35fr 1fr;
+
+            grid-template-rows:
+                auto auto;
+
+            gap:
+                20px;
+        }
+
+        .editorial-main {
+            grid-row:
+                span 2;
+        }
+
+        .editorial-main img {
+            height:
+                100%;
+
+            min-height:
+                630px;
+        }
+
+        .editorial-side img {
+            aspect-ratio:
+                4 / 3;
+        }
+
+        .editorial-bottom {
+            grid-column:
+                1 / -1;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                20px;
+        }
+
+        .editorial-bottom img {
+            aspect-ratio:
+                4 / 3;
+        }
+
+
+        /* =====================================================
+           HAND HOLDING 11-12
+        ===================================================== */
+
+        .hands-layout {
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 140px 1fr;
+
+            gap:
+                18px;
+
+            align-items:
+                center;
+        }
+
+        .hands-layout img {
+            aspect-ratio:
+                4 / 5;
+        }
+
+        .between-hearts {
+            text-align:
+                center;
+
+            font-size:
+                50px;
+
+            color:
+                #b64c77;
+
+            animation:
+                pulse 1.8s infinite;
+        }
+
+        .hands-quote {
+            margin-top:
+                26px;
+
+            text-align:
+                center;
+
+            font-size:
+                22px;
+
+            color:
+                #a14169;
+
+            font-style:
+                italic;
+        }
+
+
+        /* =====================================================
+           EARRINGS 13-15
+        ===================================================== */
+
+        .earring-layout {
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1.15fr 1fr;
+
+            gap:
+                20px;
+
+            align-items:
+                center;
+        }
+
+        .earring-layout .center {
+            transform:
+                translateY(-18px);
+        }
+
+        .earring-layout img {
+            aspect-ratio:
+                4 / 5;
+        }
+
+
+        /* =====================================================
+           PHOTO 16 FULL WIDTH CINEMATIC
+        ===================================================== */
+
+        .cinematic {
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+            border-radius:
+                28px;
+
+            box-shadow:
+                0 25px 60px
+                rgba(110,38,70,.20);
+        }
+
+        .cinematic img {
+            display:
+                block;
+
+            width:
+                100%;
+
+            max-height:
+                680px;
+
+            object-fit:
+                cover;
+        }
+
+        .cinematic-overlay {
+            position:
+                absolute;
+
+            inset:
+                0;
+
+            display:
+                flex;
+
+            align-items:
+                flex-end;
+
+            padding:
+                35px;
+
+            background:
+                linear-gradient(
+                    transparent 45%,
+                    rgba(61,20,40,.72)
+                );
+        }
+
+        .cinematic-overlay div {
+            max-width:
+                700px;
+
+            color:
+                white;
+        }
+
+        .cinematic-overlay span {
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                11px;
+
+            letter-spacing:
+                2px;
+
+            text-transform:
+                uppercase;
+        }
+
+        .cinematic-overlay h3 {
+            margin-top:
+                10px;
+
+            font-size:
+                clamp(
+                    23px,
+                    4vw,
+                    38px
+                );
+
+            line-height:
+                1.35;
+
+            font-weight:
+                400;
+        }
+
+
+        /* =====================================================
+           COUPLE PHOTOS 17-22
+        ===================================================== */
+
+        .couple-layout {
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                20px;
+        }
+
+        .couple-hero {
+            grid-row:
+                span 2;
+        }
+
+        .couple-hero img {
+            height:
+                100%;
+
+            min-height:
+                640px;
+        }
+
+        .couple-side {
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                18px;
+        }
+
+        .couple-side img {
+            aspect-ratio:
+                4 / 5;
+        }
+
+        .couple-bottom {
+            grid-column:
+                1 / -1;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                20px;
+        }
+
+        .couple-bottom img {
+            aspect-ratio:
+                16 / 10;
+        }
+
+
+        /* =====================================================
+           BIRTHDAY 23-24
+        ===================================================== */
+
+        .birthday-split {
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                24px;
+        }
+
+        .birthday-split img {
+            aspect-ratio:
+                4 / 5;
+        }
+
+        .birthday-split .frame:first-child {
+            transform:
+                rotate(-1.7deg);
+        }
+
+        .birthday-split .frame:last-child {
+            transform:
+                rotate(1.7deg);
+        }
+
+
+        /* =====================================================
+           SAREE 25-28
+        ===================================================== */
+
+        .saree-layout {
+            display:
+                grid;
+
+            grid-template-columns:
+                1.4fr 1fr;
+
+            gap:
+                22px;
+        }
+
+        .saree-feature img {
+            height:
+                100%;
+
+            min-height:
+                680px;
+        }
+
+        .saree-side {
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                18px;
+        }
+
+        .saree-side .frame:first-child {
+            grid-column:
+                1 / -1;
+        }
+
+        .saree-side img {
+            aspect-ratio:
+                4 / 5;
+        }
+
+
+        /* =====================================================
+           SINGLE PLAYFUL 29-30
+        ===================================================== */
+
+        .single-highlight {
+            max-width:
+                580px;
+
+            margin:
+                auto;
+        }
+
+        .single-highlight img {
+            aspect-ratio:
+                4 / 5;
+        }
+
+
+        /* =====================================================
+           FINAL BEAUTY GALLERY 31-37
+        ===================================================== */
+
+        .final-showcase {
+            display:
+                grid;
+
+            gap:
+                22px;
+        }
+
+        .final-hero {
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+            border-radius:
+                30px;
+
+            box-shadow:
+                0 28px 70px
+                rgba(100,34,66,.22);
+        }
+
+        .final-hero img {
+            display:
+                block;
+
+            width:
+                100%;
+
+            max-height:
+                800px;
+
+            object-fit:
+                cover;
+        }
+
+        .final-overlay {
+            position:
+                absolute;
+
+            left:
+                0;
+
+            right:
+                0;
+
+            bottom:
+                0;
+
+            padding:
+                45px
+                35px
+                35px;
+
+            text-align:
+                center;
+
+            color:
+                white;
+
+            background:
+                linear-gradient(
+                    transparent,
+                    rgba(65,20,42,.76)
+                );
+        }
+
+        .final-overlay span {
+            font-family:
+                Arial,
+                sans-serif;
+
+            letter-spacing:
+                2px;
+
+            font-size:
+                11px;
+
+            text-transform:
+                uppercase;
+        }
+
+        .final-overlay h3 {
+            margin-top:
+                10px;
+
+            font-size:
+                clamp(
+                    24px,
+                    4vw,
+                    40px
+                );
+
+            font-weight:
+                400;
+        }
+
+        .final-pair {
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                22px;
+        }
+
+        .final-pair img {
+            aspect-ratio:
+                4 / 5;
+        }
+
+        .final-mini-grid {
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    4,
+                    1fr
+                );
+
+            gap:
+                16px;
+        }
+
+        .final-mini-grid img {
+            aspect-ratio:
+                4 / 5;
+        }
+
+        .luxury-frame {
+            position:
+                relative;
+
+            background:
+                linear-gradient(
+                    #ffffff,
+                    #ffffff
+                ) padding-box,
+
+                linear-gradient(
+                    135deg,
+                    #efadc7,
+                    #b84f78,
+                    #f6cadb
+                ) border-box;
+
+            border:
+                2px solid transparent;
+        }
+
+        .luxury-frame::before {
+            content:
+                "✦";
+
+            position:
+                absolute;
+
+            top:
+                12px;
+
+            right:
+                15px;
+
+            z-index:
+                3;
+
+            color:
+                #fff;
+
+            text-shadow:
+                0 2px 6px
+                rgba(80,25,48,.4);
+
+            font-size:
+                18px;
+        }
+
+        .final-quote {
+            margin-top:
+                32px;
+
+            padding:
+                30px
+                20px;
+
+            text-align:
+                center;
+
+            border-top:
+                1px solid
+                rgba(180,90,125,.24);
+
+            border-bottom:
+                1px solid
+                rgba(180,90,125,.24);
+
+            color:
+                #a14169;
+
+            font-size:
+                23px;
+
+            line-height:
+                1.7;
+
+            font-style:
+                italic;
+        }
+
+
+        /* =====================================================
+           ENDING
+        ===================================================== */
+
+        .ending {
+            margin-top:
+                40px;
+
+            padding:
+                60px
+                40px;
+
+            text-align:
+                center;
+
+            border-radius:
+                38px;
+
+            background:
+                rgba(255,255,255,.62);
+
+            backdrop-filter:
+                blur(20px);
+
+            -webkit-backdrop-filter:
+                blur(20px);
+
+            border:
+                1px solid
+                rgba(255,255,255,.9);
+
+            box-shadow:
+                0 25px 70px
+                rgba(115,40,75,.14);
+        }
+
+        .ending-heart {
+            font-size:
+                48px;
+
+            animation:
+                pulse 1.8s infinite;
+        }
+
+        .ending h2 {
+            margin-top:
+                15px;
+
+            font-size:
+                clamp(
+                    34px,
+                    6vw,
+                    54px
+                );
+
+            font-weight:
+                500;
+
+            color:
+                #632c46;
+        }
+
+        .ending p {
+            max-width:
+                800px;
+
+            margin:
+                20px auto 0;
+
+            font-size:
+                18px;
+
+            line-height:
+                1.95;
+
+            color:
+                #684153;
+        }
+
+        .signature {
+            margin-top:
+                32px;
+
+            color:
+                #a14169;
+
+            font-size:
+                24px;
+
+            font-style:
+                italic;
+        }
+
+        .back {
+            display:
+                inline-block;
+
+            margin-top:
+                35px;
+
+            padding:
+                14px
+                27px;
+
+            text-decoration:
+                none;
+
+            color:
+                #8f315b;
+
+            border:
+                1px solid
+                rgba(161,77,112,.35);
+
+            border-radius:
+                50px;
+
+            background:
+                rgba(255,255,255,.28);
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                13px;
+
+            transition:
+                .3s;
+        }
+
+        .back:hover {
+            transform:
+                translateY(-3px);
+
+            background:
+                rgba(255,255,255,.65);
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 800px) {
+
+            .page {
+                padding:
+                    15px 13px
+                    50px;
+            }
+
+            .opening-card {
+                padding:
+                    48px
+                    22px;
+
+                border-radius:
+                    30px;
+            }
+
+            .story-card,
+            .photo-section {
+                padding:
+                    38px
+                    20px;
+
+                border-radius:
+                    28px;
+            }
+
+            .opening-message,
+            .story-text,
+            .section-message,
+            .ending p {
+                font-size:
+                    16px;
+            }
+
+            .video-layout,
+            .editorial-grid,
+            .hands-layout,
+            .earring-layout,
+            .couple-layout,
+            .birthday-split,
+            .saree-layout {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .video-small-grid,
+            .editorial-bottom,
+            .couple-side,
+            .couple-bottom,
+            .final-pair {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .editorial-main {
+                grid-row:
+                    auto;
+            }
+
+            .editorial-bottom {
+                grid-column:
+                    auto;
+            }
+
+            .editorial-main img,
+            .couple-hero img,
+            .saree-feature img {
+                min-height:
+                    auto;
+
+                height:
+                    auto;
+
+                aspect-ratio:
+                    4 / 5;
+            }
+
+            .between-hearts {
+                font-size:
+                    34px;
+            }
+
+            .earring-layout .center {
+                transform:
+                    none;
+            }
+
+            .final-mini-grid {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .hero-photo-overlay {
+                left:
+                    15px;
+
+                right:
+                    15px;
+
+                bottom:
+                    15px;
+
+                padding:
+                    16px;
+            }
+
+            .cinematic-overlay {
+                padding:
+                    20px;
+            }
+
+            .ending {
+                padding:
+                    45px
+                    22px;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+
+            .video-small-grid,
+            .editorial-bottom,
+            .couple-side,
+            .couple-bottom,
+            .final-pair,
+            .final-mini-grid,
+            .saree-side {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .saree-side .frame:first-child {
+                grid-column:
+                    auto;
+            }
+
+            figcaption {
+                font-size:
+                    13px;
+            }
+
+            .big-quote,
+            .final-quote {
+                font-size:
+                    19px;
+            }
+        }
+
+    </style>
 </head>
 
 
 <body>
-
-    <!-- =====================================================
-         BACKGROUND MUSIC
-    ====================================================== -->
-
-    <audio id="backgroundMusic" loop>
-        <source src="birthday-music.mp3" type="audio/mpeg">
-    </audio>
-
-    <button id="musicButton" class="music-button">
-        🎵 Play Music
-    </button>
-
-
-    <!-- Background decorations -->
 
     <div class="blob one"></div>
     <div class="blob two"></div>
@@ -57,6 +1727,7 @@
                 </h1>
 
                 <div class="divider"></div>
+
 
                 <div class="opening-message">
 
@@ -110,6 +1781,7 @@
                     </p>
 
                 </div>
+
 
                 <div class="scroll-down">
                     ↓ Our story begins here ↓
@@ -277,9 +1949,9 @@
                 </p>
 
                 <p>
-                    We held hands while watching songs and shows,
-                    kissed and hugged whenever we wanted,
-                    and talked about risks —
+                    Now we hold hands while watching songs and shows,
+                    kiss and hug whenever we want,
+                    and talk about risks —
                     we were the ones taking risks
                     in front of everyone!
                 </p>
@@ -359,6 +2031,7 @@
 
             </div>
 
+
             <div class="big-quote">
                 “Maybe we never needed a perfect name
                 for whatever this was.
@@ -378,15 +2051,20 @@
 
             <div class="section-heading">
 
-                <div class="section-icon">🌷</div>
+                <div class="section-icon">
+                    🌷
+                </div>
 
                 <div class="eyebrow">
                     One Of My Forever Favorites
                 </div>
 
-                <h2>That Smile ❤️</h2>
+                <h2>
+                    That Smile ❤️
+                </h2>
 
             </div>
+
 
             <div class="hero-memory">
 
@@ -415,7 +2093,9 @@
 
             </div>
 
-            <p class="section-message message-after-photo">
+
+            <p class="section-message"
+               style="margin-top:30px;">
 
                 And do you remember this picture?
                 It has remained in my all-time favorites ever since...
@@ -441,7 +2121,9 @@
 
             <div class="section-heading">
 
-                <div class="section-icon">📱❤️</div>
+                <div class="section-icon">
+                    📱❤️
+                </div>
 
                 <div class="eyebrow">
                     Video Call Days
@@ -456,6 +2138,7 @@
                 </p>
 
             </div>
+
 
             <p class="section-message">
 
@@ -478,13 +2161,18 @@
 
             </p>
 
+
             <div class="video-layout">
 
                 <div class="video-main">
 
                     <figure class="frame">
 
-                        <img src="photo2.jpg" alt="Video call memory" loading="lazy">
+                        <img
+                            src="photo2.jpg"
+                            alt="Video call memory"
+                            loading="lazy"
+                        >
 
                         <figcaption>
                             Somehow, even a screen
@@ -495,33 +2183,35 @@
 
                 </div>
 
+
                 <div class="video-small-grid">
 
                     <figure class="frame">
-                        <img src="photo3.jpg" alt="Video call memory" loading="lazy">
+                        <img src="photo3.jpg" alt="" loading="lazy">
                         <figcaption>
                             One call could change the whole mood.
                         </figcaption>
                     </figure>
 
                     <figure class="frame">
-                        <img src="photo4.jpg" alt="Video call memory" loading="lazy">
+                        <img src="photo4.jpg" alt="" loading="lazy">
                         <figcaption>
                             Happiness sometimes looked exactly like this.
                         </figcaption>
                     </figure>
 
                     <figure class="frame">
-                        <img src="photo5.jpg" alt="Video call memory" loading="lazy">
+                        <img src="photo5.jpg" alt="" loading="lazy">
                         <figcaption>
                             Just seeing you was enough.
                         </figcaption>
                     </figure>
 
                     <figure class="frame">
-                        <img src="photo6.jpg" alt="Video call memory" loading="lazy">
+                        <img src="photo6.jpg" alt="" loading="lazy">
                         <figcaption>
-                            Little screenshots, very big memories. 🫶
+                            Little screenshots,
+                            very big memories. 🫶
                         </figcaption>
                     </figure>
 
@@ -541,7 +2231,9 @@
 
             <div class="section-heading">
 
-                <div class="section-icon">✨</div>
+                <div class="section-icon">
+                    ✨
+                </div>
 
                 <div class="eyebrow">
                     Beautiful You
@@ -552,6 +2244,7 @@
                 </h2>
 
             </div>
+
 
             <p class="section-message">
 
@@ -579,45 +2272,88 @@
 
             </p>
 
+
             <div class="editorial-grid">
 
                 <figure class="frame editorial-main">
-                    <img src="photo7.jpg" alt="Beautiful memory" loading="lazy">
+
+                    <img
+                        src="photo7.jpg"
+                        alt=""
+                        loading="lazy"
+                    >
+
                     <figcaption>
-                        Forgetting you? Clearly not happening. ❤️
+                        Forgetting you?
+                        Clearly not happening. ❤️
                     </figcaption>
+
                 </figure>
 
+
                 <figure class="frame editorial-side">
-                    <img src="photo8.jpg" alt="Beautiful memory" loading="lazy">
+
+                    <img
+                        src="photo8.jpg"
+                        alt=""
+                        loading="lazy"
+                    >
+
                     <figcaption>
                         Every outfit somehow looks made for you.
                     </figcaption>
+
                 </figure>
 
+
                 <figure class="frame editorial-side">
-                    <img src="photo9.jpg" alt="Beautiful memory" loading="lazy">
+
+                    <img
+                        src="photo9.jpg"
+                        alt=""
+                        loading="lazy"
+                    >
+
                     <figcaption>
-                        Pretty outside, even prettier from the heart.
+                        Pretty outside,
+                        even prettier from the heart.
                     </figcaption>
+
                 </figure>
 
             </div>
 
-            <div class="editorial-bottom">
+
+            <div class="editorial-bottom"
+                 style="margin-top:20px;">
 
                 <figure class="frame">
 
-                    <img src="photo10.jpg" alt="Beautiful memory" loading="lazy">
+                    <img
+                        src="photo10.jpg"
+                        alt=""
+                        loading="lazy"
+                    >
 
                     <figcaption>
-                        Yes... this whole page is also
+                        Yes...
+                        this whole page is also
                         an excuse to admire you more. 😂❤️
                     </figcaption>
 
                 </figure>
 
-                <div class="editorial-quote">
+                <div style="
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    padding:25px;
+                    text-align:center;
+                    font-size:22px;
+                    line-height:1.7;
+                    color:#a14169;
+                    font-style:italic;
+                ">
                     “Sometimes the person
                     you are trying hardest to forget
                     is the person your heart
@@ -638,7 +2374,9 @@
 
             <div class="section-heading">
 
-                <div class="section-icon">🤝❤️</div>
+                <div class="section-icon">
+                    🤝❤️
+                </div>
 
                 <div class="eyebrow">
                     Holding On
@@ -649,6 +2387,7 @@
                 </h2>
 
             </div>
+
 
             <p class="section-message">
 
@@ -665,7 +2404,8 @@
 
                 I used to dream
                 of traveling the whole world
-                holding this hand. 🙂❤️
+                holding this hand.
+                🙂❤️
 
                 This is that kind of hand
                 which I never feel like letting go of
@@ -682,11 +2422,16 @@
 
             </p>
 
+
             <div class="hands-layout">
 
                 <figure class="frame">
 
-                    <img src="photo11.jpg" alt="Holding hands" loading="lazy">
+                    <img
+                        src="photo11.jpg"
+                        alt=""
+                        loading="lazy"
+                    >
 
                     <figcaption>
                         A hand that somehow felt like home.
@@ -694,13 +2439,19 @@
 
                 </figure>
 
+
                 <div class="between-hearts">
                     ♡
                 </div>
 
+
                 <figure class="frame">
 
-                    <img src="photo12.jpg" alt="Holding hands" loading="lazy">
+                    <img
+                        src="photo12.jpg"
+                        alt=""
+                        loading="lazy"
+                    >
 
                     <figcaption>
                         I could have walked
@@ -710,6 +2461,7 @@
                 </figure>
 
             </div>
+
 
             <div class="hands-quote">
                 “Some hands are easy to hold.
@@ -728,7 +2480,9 @@
 
             <div class="section-heading">
 
-                <div class="section-icon">💎</div>
+                <div class="section-icon">
+                    💎
+                </div>
 
                 <div class="eyebrow">
                     Earrings & You
@@ -739,6 +2493,7 @@
                 </h2>
 
             </div>
+
 
             <p class="section-message">
 
@@ -762,34 +2517,53 @@
 
             </p>
 
+
             <div class="earring-layout">
 
                 <figure class="frame">
 
-                    <img src="photo13.jpg" alt="Earring memory" loading="lazy">
+                    <img
+                        src="photo13.jpg"
+                        alt=""
+                        loading="lazy"
+                    >
 
                     <figcaption>
-                        Earrings + you = unfair levels of beauty.
+                        Earrings + you =
+                        unfair levels of beauty.
                     </figcaption>
 
                 </figure>
+
 
                 <figure class="frame center">
 
-                    <img src="photo14.jpg" alt="Earring memory" loading="lazy">
+                    <img
+                        src="photo14.jpg"
+                        alt=""
+                        loading="lazy"
+                    >
 
                     <figcaption>
-                        Somehow you make every little sparkle look expensive. ✨
+                        Somehow you make
+                        every little sparkle look expensive. ✨
                     </figcaption>
 
                 </figure>
 
+
                 <figure class="frame">
 
-                    <img src="photo15.jpg" alt="Earring memory" loading="lazy">
+                    <img
+                        src="photo15.jpg"
+                        alt=""
+                        loading="lazy"
+                    >
 
                     <figcaption>
-                        One day, the earring shopping promise is still pending. ❤️
+                        One day,
+                        the earring shopping promise
+                        is still pending. ❤️
                     </figcaption>
 
                 </figure>
@@ -808,7 +2582,9 @@
 
             <div class="section-heading">
 
-                <div class="section-icon">😂</div>
+                <div class="section-icon">
+                    😂
+                </div>
 
                 <div class="eyebrow">
                     Unexpected Entry
@@ -819,6 +2595,7 @@
                 </h2>
 
             </div>
+
 
             <p class="section-message">
 
@@ -853,9 +2630,14 @@
 
             </p>
 
+
             <div class="cinematic">
 
-                <img src="photo16.jpg" alt="Special memory" loading="lazy">
+                <img
+                    src="photo16.jpg"
+                    alt=""
+                    loading="lazy"
+                >
 
                 <div class="cinematic-overlay">
 
@@ -889,7 +2671,9 @@
 
             <div class="section-heading">
 
-                <div class="section-icon">💑</div>
+                <div class="section-icon">
+                    💑
+                </div>
 
                 <div class="eyebrow">
                     Us
@@ -900,6 +2684,7 @@
                 </h2>
 
             </div>
+
 
             <p class="section-message">
 
@@ -941,11 +2726,16 @@
 
             </p>
 
+
             <div class="couple-layout">
 
                 <figure class="frame couple-hero">
 
-                    <img src="photo17.jpg" alt="Couple memory" loading="lazy">
+                    <img
+                        src="photo17.jpg"
+                        alt=""
+                        loading="lazy"
+                    >
 
                     <figcaption>
                         Standing beside you
@@ -954,43 +2744,53 @@
 
                 </figure>
 
+
                 <div class="couple-side">
 
                     <figure class="frame">
-                        <img src="photo18.jpg" alt="Couple memory" loading="lazy">
+                        <img src="photo18.jpg" alt="" loading="lazy">
                         <figcaption>
-                            Somehow we looked really good together.
+                            Somehow we looked
+                            really good together.
                         </figcaption>
                     </figure>
 
                     <figure class="frame">
-                        <img src="photo19.jpg" alt="Couple memory" loading="lazy">
+                        <img src="photo19.jpg" alt="" loading="lazy">
                         <figcaption>
-                            One of those memories worth keeping.
+                            One of those memories
+                            worth keeping.
                         </figcaption>
                     </figure>
 
                     <figure class="frame">
-                        <img src="photo20.jpg" alt="Couple memory" loading="lazy">
+                        <img src="photo20.jpg" alt="" loading="lazy">
                         <figcaption>
-                            My partner was clearly carrying the photo. 😂
+                            My partner
+                            was clearly carrying the photo. 😂
                         </figcaption>
                     </figure>
 
                     <figure class="frame">
-                        <img src="photo21.jpg" alt="Couple memory" loading="lazy">
+                        <img src="photo21.jpg" alt="" loading="lazy">
                         <figcaption>
-                            You + me + one memory I still smile at.
+                            You + me + one memory
+                            I still smile at.
                         </figcaption>
                     </figure>
 
                 </div>
 
+
                 <div class="couple-bottom">
 
                     <figure class="frame">
 
-                        <img src="photo22.jpg" alt="Couple memory" loading="lazy">
+                        <img
+                            src="photo22.jpg"
+                            alt=""
+                            loading="lazy"
+                        >
 
                         <figcaption>
                             Looking good together was easy...
@@ -999,13 +2799,22 @@
 
                     </figure>
 
-                    <div class="editorial-quote">
 
+                    <div style="
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        text-align:center;
+                        padding:25px;
+                        font-size:22px;
+                        line-height:1.7;
+                        color:#a14169;
+                        font-style:italic;
+                    ">
                         “A beautiful relationship
                         needs more than beautiful photographs.
                         It needs two people
                         choosing each other through effort.”
-
                     </div>
 
                 </div>
@@ -1017,14 +2826,16 @@
 
 
         <!-- =====================================================
-             BIRTHDAY 23-24
+             BIRTHDAY SURPRISE 23-24
         ====================================================== -->
 
         <section class="photo-section reveal">
 
             <div class="section-heading">
 
-                <div class="section-icon">🎂🎁</div>
+                <div class="section-icon">
+                    🎂🎁
+                </div>
 
                 <div class="eyebrow">
                     My Birthday Memory
@@ -1035,6 +2846,7 @@
                 </h2>
 
             </div>
+
 
             <p class="section-message">
 
@@ -1062,30 +2874,43 @@
 
             </p>
 
+
             <div class="birthday-split">
 
                 <figure class="frame">
 
-                    <img src="photo23.jpg" alt="Birthday surprise" loading="lazy">
+                    <img
+                        src="photo23.jpg"
+                        alt=""
+                        loading="lazy"
+                    >
 
                     <figcaption>
-                        The surprise mattered because the effort came from you. ❤️
+                        The surprise mattered
+                        because the effort came from you. ❤️
                     </figcaption>
 
                 </figure>
 
+
                 <figure class="frame">
 
-                    <img src="photo24.jpg" alt="Birthday surprise" loading="lazy">
+                    <img
+                        src="photo24.jpg"
+                        alt=""
+                        loading="lazy"
+                    >
 
                     <figcaption>
-                        One birthday, one beautiful memory,
+                        One birthday,
+                        one beautiful memory,
                         and a lesson I never forgot.
                     </figcaption>
 
                 </figure>
 
             </div>
+
 
             <div class="big-quote">
 
@@ -1114,7 +2939,9 @@
 
             <div class="section-heading">
 
-                <div class="section-icon">🌺</div>
+                <div class="section-icon">
+                    🌺
+                </div>
 
                 <div class="eyebrow">
                     Saree Era
@@ -1125,6 +2952,7 @@
                 </h2>
 
             </div>
+
 
             <p class="section-message">
 
@@ -1148,11 +2976,16 @@
 
             </p>
 
+
             <div class="saree-layout">
 
                 <figure class="frame saree-feature">
 
-                    <img src="photo25.jpg" alt="Saree memory" loading="lazy">
+                    <img
+                        src="photo25.jpg"
+                        alt=""
+                        loading="lazy"
+                    >
 
                     <figcaption>
                         This is exactly why
@@ -1161,27 +2994,54 @@
 
                 </figure>
 
+
                 <div class="saree-side">
 
                     <figure class="frame">
-                        <img src="photo26.jpg" alt="Saree memory" loading="lazy">
+
+                        <img
+                            src="photo26.jpg"
+                            alt=""
+                            loading="lazy"
+                        >
+
                         <figcaption>
-                            Grace and beauty in one frame.
+                            Grace and beauty
+                            in one frame.
                         </figcaption>
+
                     </figure>
 
-                    <figure class="frame">
-                        <img src="photo27.jpg" alt="Saree memory" loading="lazy">
-                        <figcaption>
-                            Seriously... this should be illegal. 🥹
-                        </figcaption>
-                    </figure>
 
                     <figure class="frame">
-                        <img src="photo28.jpg" alt="Saree memory" loading="lazy">
+
+                        <img
+                            src="photo27.jpg"
+                            alt=""
+                            loading="lazy"
+                        >
+
                         <figcaption>
-                            A diamond completely out of my league. 💖
+                            Seriously...
+                            this should be illegal. 🥹
                         </figcaption>
+
+                    </figure>
+
+
+                    <figure class="frame">
+
+                        <img
+                            src="photo28.jpg"
+                            alt=""
+                            loading="lazy"
+                        >
+
+                        <figcaption>
+                            A diamond
+                            completely out of my league. 💖
+                        </figcaption>
+
                     </figure>
 
                 </div>
@@ -1200,7 +3060,9 @@
 
             <div class="section-heading">
 
-                <div class="section-icon">😏</div>
+                <div class="section-icon">
+                    😏
+                </div>
 
                 <div class="eyebrow">
                     Jealous Me
@@ -1211,6 +3073,7 @@
                 </h2>
 
             </div>
+
 
             <p class="section-message">
 
@@ -1234,14 +3097,20 @@
 
             </p>
 
+
             <div class="single-highlight">
 
                 <figure class="frame">
 
-                    <img src="photo29.jpg" alt="Friend memory" loading="lazy">
+                    <img
+                        src="photo29.jpg"
+                        alt=""
+                        loading="lazy"
+                    >
 
                     <figcaption>
-                        Yes. I was probably jealous
+                        Yes.
+                        I was probably jealous
                         just looking at this photo too. 😭❤️
                     </figcaption>
 
@@ -1261,7 +3130,9 @@
 
             <div class="section-heading">
 
-                <div class="section-icon">🍔🍕🍟</div>
+                <div class="section-icon">
+                    🍔🍕🍟
+                </div>
 
                 <div class="eyebrow">
                     The Deal
@@ -1272,6 +3143,7 @@
                 </h2>
 
             </div>
+
 
             <p class="section-message">
 
@@ -1292,14 +3164,20 @@
 
             </p>
 
+
             <div class="single-highlight">
 
                 <figure class="frame">
 
-                    <img src="photo30.jpg" alt="Food memory" loading="lazy">
+                    <img
+                        src="photo30.jpg"
+                        alt=""
+                        loading="lazy"
+                    >
 
                     <figcaption>
-                        One long food date is still pending. 🍟❤️
+                        One long food date
+                        is still pending. 🍟❤️
                     </figcaption>
 
                 </figure>
@@ -1311,14 +3189,16 @@
 
 
         <!-- =====================================================
-             FINAL PHOTOS 31-37
+             FINAL BEAUTY PHOTOS 31-37
         ====================================================== -->
 
         <section class="photo-section reveal">
 
             <div class="section-heading">
 
-                <div class="section-icon">👑✨</div>
+                <div class="section-icon">
+                    👑✨
+                </div>
 
                 <div class="eyebrow">
                     And Then You Sent These...
@@ -1329,6 +3209,7 @@
                 </h2>
 
             </div>
+
 
             <p class="section-message">
 
@@ -1372,9 +3253,16 @@
 
             <div class="final-showcase">
 
+
+                <!-- BIG HERO -->
+
                 <div class="final-hero">
 
-                    <img src="photo31.jpg" alt="Beautiful portrait" loading="lazy">
+                    <img
+                        src="photo31.jpg"
+                        alt=""
+                        loading="lazy"
+                    >
 
                     <div class="final-overlay">
 
@@ -1393,11 +3281,18 @@
                 </div>
 
 
+
+                <!-- TWO MEDIUM PHOTOS -->
+
                 <div class="final-pair">
 
                     <figure class="frame luxury-frame">
 
-                        <img src="photo32.jpg" alt="Beautiful portrait" loading="lazy">
+                        <img
+                            src="photo32.jpg"
+                            alt=""
+                            loading="lazy"
+                        >
 
                         <figcaption>
                             One more reason
@@ -1406,9 +3301,14 @@
 
                     </figure>
 
+
                     <figure class="frame luxury-frame">
 
-                        <img src="photo33.jpg" alt="Beautiful portrait" loading="lazy">
+                        <img
+                            src="photo33.jpg"
+                            alt=""
+                            loading="lazy"
+                        >
 
                         <figcaption>
                             How does one person
@@ -1420,39 +3320,78 @@
                 </div>
 
 
+
+                <!-- FOUR SMALLER PHOTOS -->
+
                 <div class="final-mini-grid">
 
                     <figure class="frame luxury-frame">
-                        <img src="photo34.jpg" alt="Beautiful portrait" loading="lazy">
-                        <figcaption>Pure grace. ❤️</figcaption>
-                    </figure>
 
-                    <figure class="frame luxury-frame">
-                        <img src="photo35.jpg" alt="Beautiful portrait" loading="lazy">
+                        <img
+                            src="photo34.jpg"
+                            alt=""
+                            loading="lazy"
+                        >
+
                         <figcaption>
-                            Some photos deserve only one word: wow.
+                            Pure grace. ❤️
                         </figcaption>
+
                     </figure>
 
+
                     <figure class="frame luxury-frame">
-                        <img src="photo36.jpg" alt="Beautiful portrait" loading="lazy">
+
+                        <img
+                            src="photo35.jpg"
+                            alt=""
+                            loading="lazy"
+                        >
+
+                        <figcaption>
+                            Some photos deserve
+                            only one word:
+                            wow.
+                        </figcaption>
+
+                    </figure>
+
+
+                    <figure class="frame luxury-frame">
+
+                        <img
+                            src="photo36.jpg"
+                            alt=""
+                            loading="lazy"
+                        >
+
                         <figcaption>
                             Still not over this one.
                         </figcaption>
+
                     </figure>
 
+
                     <figure class="frame luxury-frame">
-                        <img src="photo37.jpg" alt="Beautiful portrait" loading="lazy">
+
+                        <img
+                            src="photo37.jpg"
+                            alt=""
+                            loading="lazy"
+                        >
+
                         <figcaption>
                             Forever beautiful.
                             Forever special.
                             Forever you. 💖
                         </figcaption>
+
                     </figure>
 
                 </div>
 
             </div>
+
 
             <div class="final-quote">
 
@@ -1474,7 +3413,7 @@
              FINAL MESSAGE
         ====================================================== -->
 
-        <section class="ending reveal" id="birthdayEnding">
+        <section class="ending reveal">
 
             <div class="ending-heart">
                 💝
@@ -1485,10 +3424,12 @@
                 Bakudi ❤️
             </h2>
 
+
             <p>
                 And before this little journey ends,
                 I want to say one thing properly.
             </p>
+
 
             <p>
                 I am sorry for every mistake
@@ -1499,11 +3440,13 @@
                 where my actions may have hurt you.
             </p>
 
+
             <p>
                 Thank you for always standing by me,
                 even at times when I probably did not deserve
                 that much patience from you.
             </p>
+
 
             <p>
                 Thank you for loving me
@@ -1514,6 +3457,7 @@
                 could ever copy.
             </p>
 
+
             <p>
                 Whatever happened between us,
                 whatever name our relationship had,
@@ -1522,6 +3466,7 @@
                 one of the most special people
                 in my life.
             </p>
+
 
             <p>
                 I genuinely pray
@@ -1535,6 +3480,7 @@
                 and people who value your heart.
             </p>
 
+
             <p>
                 And no matter how many birthdays come,
                 please never lose
@@ -1545,6 +3491,7 @@
                 which makes you uniquely you.
                 ❤️🫶
             </p>
+
 
             <p>
                 Happiest Birthday once again,
@@ -1563,55 +3510,10 @@
             </div>
 
 
-
-            <!-- FINAL HIDDEN SURPRISE -->
-
-            <div class="last-surprise">
-
-                <button id="surpriseButton" class="surprise-button">
-                    One Last Thing... ❤️
-                </button>
-
-
-                <div id="secretMessage" class="secret-message">
-
-                    <div class="secret-heart">
-                        💗
-                    </div>
-
-                    <h3>
-                        No matter where life takes us...
-                    </h3>
-
-                    <p>
-                        Thank you for being such an unforgettable
-                        part of my life, Bakudi.
-                    </p>
-
-                    <p>
-                        There are some people we meet,
-                        some memories we make,
-                        and some feelings we experience
-                        that time simply cannot erase.
-                    </p>
-
-                    <p>
-                        Whatever tomorrow looks like,
-                        I will always be grateful
-                        that somewhere in this lifetime,
-                        our paths crossed. ❤️
-                    </p>
-
-                    <div class="secret-signature">
-                        Happy Birthday, Beautiful. ♡
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <a href="index.html" class="back">
+            <a
+                href="index.html"
+                class="back"
+            >
                 ← Back to Home
             </a>
 
@@ -1622,28 +3524,156 @@
 
 
 
-    <!-- =====================================================
-         FULLSCREEN PHOTO LIGHTBOX
-    ====================================================== -->
+    <script>
 
-    <div id="photoLightbox" class="photo-lightbox">
+        /* =====================================================
+           FLOATING HEARTS
+        ===================================================== */
 
-        <button id="lightboxClose" class="lightbox-close">
-            ×
-        </button>
-
-        <img id="lightboxImage" src="" alt="Memory">
-
-        <div id="lightboxCaption" class="lightbox-caption"></div>
-
-    </div>
-
+        const symbols =
+            [
+                "♡",
+                "♥",
+                "💕",
+                "✨",
+                "💗"
+            ];
 
 
-    <!-- ONE EXTERNAL JAVASCRIPT FILE -->
+        function createHeart() {
 
-    <script src="script.js"></script>
+            const heart =
+                document.createElement("div");
+
+            heart.className =
+                "heart";
+
+
+            heart.innerHTML =
+                symbols[
+                    Math.floor(
+                        Math.random()
+                        *
+                        symbols.length
+                    )
+                ];
+
+
+            heart.style.left =
+                Math.random()
+                *
+                100
+                +
+                "%";
+
+
+            heart.style.fontSize =
+                (
+                    12
+                    +
+                    Math.random()
+                    *
+                    18
+                )
+                +
+                "px";
+
+
+            const duration =
+                8
+                +
+                Math.random()
+                *
+                8;
+
+
+            heart.style.animationDuration =
+                duration
+                +
+                "s";
+
+
+            document.body.appendChild(
+                heart
+            );
+
+
+            setTimeout(
+                () => {
+
+                    heart.remove();
+
+                },
+
+                duration
+                *
+                1000
+            );
+
+        }
+
+
+        setInterval(
+            createHeart,
+            1100
+        );
+
+
+
+        /* =====================================================
+           SCROLL REVEAL
+        ===================================================== */
+
+        const revealItems =
+            document.querySelectorAll(
+                ".reveal"
+            );
+
+
+        const observer =
+            new IntersectionObserver(
+
+                (entries) => {
+
+                    entries.forEach(
+                        (entry) => {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                entry.target
+                                    .classList
+                                    .add(
+                                        "visible"
+                                    );
+
+                            }
+
+                        }
+                    );
+
+                },
+
+                {
+                    threshold: .10
+                }
+
+            );
+
+
+        revealItems.forEach(
+            (item) => {
+
+                observer.observe(
+                    item
+                );
+
+            }
+        );
+
+
+    </script>
 
 </body>
-
 </html>
