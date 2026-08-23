@@ -1,4 +1,240 @@
-document.documentElement.classList.add("js-enabled");
+/* ============================================================
+   IMPORTANT
+   ACTIVATE VERSION 2 ANIMATION SYSTEM
+============================================================ */
+
+document.documentElement.classList.add("animations-on");
+
+
+/* ============================================================
+   VERSION 2 - CHAPTER REVEAL
+
+   Each chapter fades + slides gently into view.
+============================================================ */
+
+const revealItems =
+    document.querySelectorAll(".reveal");
+
+
+if ("IntersectionObserver" in window) {
+
+    const revealObserver =
+        new IntersectionObserver(
+
+            (entries) => {
+
+                entries.forEach((entry) => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("visible");
+
+                        revealObserver.unobserve(
+                            entry.target
+                        );
+
+                    }
+
+                });
+
+            },
+
+            {
+                threshold: 0.08,
+
+                /*
+                   Slight early reveal so there is
+                   no blank gap between chapters.
+                */
+
+                rootMargin: "0px 0px 100px 0px"
+            }
+
+        );
+
+
+    revealItems.forEach((item) => {
+
+        revealObserver.observe(item);
+
+    });
+
+}
+
+else {
+
+    revealItems.forEach((item) => {
+
+        item.classList.add("visible");
+
+    });
+
+}
+
+
+/* ============================================================
+   VERSION 2 - PHOTO POP REVEAL
+
+   Photos appear softly one-by-one.
+============================================================ */
+
+const photoFrames =
+    document.querySelectorAll(".frame");
+
+
+if ("IntersectionObserver" in window) {
+
+    const photoObserver =
+        new IntersectionObserver(
+
+            (entries) => {
+
+                const visiblePhotos =
+                    entries.filter(
+                        entry => entry.isIntersecting
+                    );
+
+
+                visiblePhotos.forEach(
+                    (entry, index) => {
+
+                        setTimeout(() => {
+
+                            entry.target.classList.add(
+                                "photo-visible"
+                            );
+
+                            photoObserver.unobserve(
+                                entry.target
+                            );
+
+                        }, index * 120);
+
+                    }
+
+                );
+
+            },
+
+            {
+                threshold: 0.08,
+
+                rootMargin:
+                    "0px 0px 80px 0px"
+            }
+
+        );
+
+
+    photoFrames.forEach((frame) => {
+
+        photoObserver.observe(frame);
+
+    });
+
+}
+
+else {
+
+    photoFrames.forEach((frame) => {
+
+        frame.classList.add(
+            "photo-visible"
+        );
+
+    });
+
+}
+
+
+/* ============================================================
+   PREMIUM / LARGE PHOTO REVEAL
+
+   photo1, photo16 and photo31
+============================================================ */
+
+const premiumPhotos =
+    document.querySelectorAll(
+        ".hero-photo-wrap, .cinematic, .final-hero"
+    );
+
+
+premiumPhotos.forEach((photo) => {
+
+    photo.style.opacity = "0";
+
+    photo.style.transform =
+        "translateY(35px) scale(.96)";
+
+});
+
+
+if ("IntersectionObserver" in window) {
+
+    const premiumObserver =
+        new IntersectionObserver(
+
+            (entries) => {
+
+                entries.forEach((entry) => {
+
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+
+
+                    entry.target.style.transition =
+                        "opacity 1s ease, transform 1.05s cubic-bezier(.2,.8,.2,1)";
+
+
+                    entry.target.style.opacity =
+                        "1";
+
+
+                    entry.target.style.transform =
+                        "translateY(0) scale(1)";
+
+
+                    premiumObserver.unobserve(
+                        entry.target
+                    );
+
+                });
+
+            },
+
+            {
+                threshold: 0.08,
+
+                rootMargin:
+                    "0px 0px 80px 0px"
+            }
+
+        );
+
+
+    premiumPhotos.forEach((photo) => {
+
+        premiumObserver.observe(photo);
+
+    });
+
+}
+
+else {
+
+    premiumPhotos.forEach((photo) => {
+
+        photo.style.opacity = "1";
+
+        photo.style.transform =
+            "translateY(0) scale(1)";
+
+    });
+
+}
+
+
 
 /* ============================================================
    FLOATING HEARTS
@@ -17,6 +253,7 @@ function createFloatingHeart() {
 
     const heart =
         document.createElement("div");
+
 
     heart.className =
         "heart";
@@ -71,15 +308,11 @@ function createFloatingHeart() {
     );
 
 
-    setTimeout(
-        () => {
+    setTimeout(() => {
 
-            heart.remove();
+        heart.remove();
 
-        },
-
-        duration * 1000
-    );
+    }, duration * 1000);
 
 }
 
@@ -87,60 +320,6 @@ function createFloatingHeart() {
 setInterval(
     createFloatingHeart,
     1100
-);
-
-
-
-/* ============================================================
-   SCROLL REVEAL
-============================================================ */
-
-const revealItems =
-    document.querySelectorAll(
-        ".reveal"
-    );
-
-
-const revealObserver =
-    new IntersectionObserver(
-
-        (entries) => {
-
-            entries.forEach(
-                (entry) => {
-
-                    if (
-                        entry.isIntersecting
-                    ) {
-
-                        entry.target
-                            .classList
-                            .add(
-                                "visible"
-                            );
-
-                    }
-
-                }
-            );
-
-        },
-
-        {
-            threshold: 0.10
-        }
-
-    );
-
-
-revealItems.forEach(
-    (item) => {
-
-        revealObserver.observe(
-            item
-        );
-
-    }
 );
 
 
@@ -170,14 +349,16 @@ if (
     musicButton
 ) {
 
+    music.volume = 0.55;
+
+
     musicButton.addEventListener(
+
         "click",
 
         async () => {
 
-            if (
-                !musicPlaying
-            ) {
+            if (!musicPlaying) {
 
                 try {
 
@@ -190,6 +371,11 @@ if (
 
                     musicButton.innerHTML =
                         "⏸ Pause Music";
+
+
+                    musicButton.classList.add(
+                        "playing"
+                    );
 
                 }
 
@@ -216,6 +402,11 @@ if (
                 musicButton.innerHTML =
                     "🎵 Play Music";
 
+
+                musicButton.classList.remove(
+                    "playing"
+                );
+
             }
 
         }
@@ -224,18 +415,26 @@ if (
 
 
     music.addEventListener(
-        "ended",
+
+        "pause",
 
         () => {
 
-            musicPlaying =
-                false;
+            if (music.paused) {
 
+                musicPlaying = false;
 
-            musicButton.innerHTML =
-                "🎵 Play Music";
+                musicButton.innerHTML =
+                    "🎵 Play Music";
+
+                musicButton.classList.remove(
+                    "playing"
+                );
+
+            }
 
         }
+
     );
 
 }
@@ -281,100 +480,85 @@ const galleryImages =
     );
 
 
-galleryImages.forEach(
-    (image) => {
+galleryImages.forEach((image) => {
 
-        image.addEventListener(
-            "click",
+    image.addEventListener(
 
-            () => {
+        "click",
 
-                if (
-                    !lightbox ||
-                    !lightboxImage
-                ) {
+        () => {
 
-                    return;
+            if (
+                !lightbox ||
+                !lightboxImage
+            ) {
 
-                }
-
-
-                lightboxImage.src =
-                    image.src;
-
-
-                lightboxImage.alt =
-                    image.alt
-                    ||
-                    "Memory";
-
-
-                let caption =
-                    "";
-
-
-                const figure =
-                    image.closest(
-                        "figure"
-                    );
-
-
-                if (
-                    figure
-                ) {
-
-                    const figcaption =
-                        figure.querySelector(
-                            "figcaption"
-                        );
-
-
-                    if (
-                        figcaption
-                    ) {
-
-                        caption =
-                            figcaption.innerText;
-
-                    }
-
-                }
-
-
-                if (
-                    lightboxCaption
-                ) {
-
-                    lightboxCaption.innerText =
-                        caption;
-
-                }
-
-
-                lightbox.classList.add(
-                    "active"
-                );
-
-
-                document.body.style.overflow =
-                    "hidden";
+                return;
 
             }
 
-        );
 
-    }
-);
+            lightboxImage.src =
+                image.src;
+
+
+            lightboxImage.alt =
+                image.alt ||
+                "Memory";
+
+
+            let caption = "";
+
+
+            const figure =
+                image.closest("figure");
+
+
+            if (figure) {
+
+                const figcaption =
+                    figure.querySelector(
+                        "figcaption"
+                    );
+
+
+                if (figcaption) {
+
+                    caption =
+                        figcaption.innerText;
+
+                }
+
+            }
+
+
+            if (lightboxCaption) {
+
+                lightboxCaption.innerText =
+                    caption;
+
+            }
+
+
+            lightbox.classList.add(
+                "active"
+            );
+
+
+            document.body.style.overflow =
+                "hidden";
+
+        }
+
+    );
+
+});
 
 
 function closeLightbox() {
 
-    if (
-        !lightbox
-    ) {
-
+    if (!lightbox) {
         return;
-
     }
 
 
@@ -387,21 +571,20 @@ function closeLightbox() {
         "";
 
 
-    if (
-        lightboxImage
-    ) {
+    setTimeout(() => {
 
-        lightboxImage.src =
-            "";
+        if (lightboxImage) {
 
-    }
+            lightboxImage.src = "";
+
+        }
+
+    }, 400);
 
 }
 
 
-if (
-    lightboxClose
-) {
+if (lightboxClose) {
 
     lightboxClose.addEventListener(
         "click",
@@ -411,9 +594,7 @@ if (
 }
 
 
-if (
-    lightbox
-) {
+if (lightbox) {
 
     lightbox.addEventListener(
 
@@ -422,9 +603,7 @@ if (
         (event) => {
 
             if (
-                event.target
-                ===
-                lightbox
+                event.target === lightbox
             ) {
 
                 closeLightbox();
@@ -445,9 +624,7 @@ document.addEventListener(
     (event) => {
 
         if (
-            event.key
-            ===
-            "Escape"
+            event.key === "Escape"
         ) {
 
             closeLightbox();
@@ -461,7 +638,7 @@ document.addEventListener(
 
 
 /* ============================================================
-   BIRTHDAY CONFETTI
+   BIRTHDAY ENDING CONFETTI
 ============================================================ */
 
 const birthdayEnding =
@@ -475,7 +652,8 @@ let confettiPlayed =
 
 
 if (
-    birthdayEnding
+    birthdayEnding &&
+    "IntersectionObserver" in window
 ) {
 
     const confettiObserver =
@@ -483,32 +661,32 @@ if (
 
             (entries) => {
 
-                entries.forEach(
+                entries.forEach((entry) => {
 
-                    (entry) => {
+                    if (
+                        entry.isIntersecting &&
+                        !confettiPlayed
+                    ) {
 
-                        if (
-                            entry.isIntersecting
-                            &&
-                            !confettiPlayed
-                        ) {
-
-                            confettiPlayed =
-                                true;
+                        confettiPlayed =
+                            true;
 
 
-                            launchBirthdayConfetti();
+                        launchBirthdayConfetti();
 
-                        }
+
+                        confettiObserver.unobserve(
+                            birthdayEnding
+                        );
 
                     }
 
-                );
+                });
 
             },
 
             {
-                threshold: 0.35
+                threshold: 0.30
             }
 
         );
@@ -519,6 +697,7 @@ if (
     );
 
 }
+
 
 
 function launchBirthdayConfetti() {
@@ -536,92 +715,79 @@ function launchBirthdayConfetti() {
 
     for (
         let i = 0;
-        i < 75;
+        i < 80;
         i++
     ) {
 
-        setTimeout(
+        setTimeout(() => {
 
-            () => {
-
-                const piece =
-                    document.createElement(
-                        "div"
-                    );
+            const piece =
+                document.createElement(
+                    "div"
+                );
 
 
-                piece.className =
-                    "confetti-piece";
+            piece.className =
+                "confetti-piece";
 
 
-                piece.innerHTML =
-                    confettiSymbols[
-                        Math.floor(
-                            Math.random()
-                            *
-                            confettiSymbols.length
-                        )
-                    ];
-
-
-                piece.style.left =
-                    Math.random()
-                    *
-                    100
-                    +
-                    "vw";
-
-
-                piece.style.fontSize =
-                    (
-                        14
-                        +
+            piece.innerHTML =
+                confettiSymbols[
+                    Math.floor(
                         Math.random()
                         *
-                        18
+                        confettiSymbols.length
                     )
-                    +
-                    "px";
+                ];
 
 
-                const duration =
-                    3
+            piece.style.left =
+                Math.random()
+                *
+                100
+                +
+                "vw";
+
+
+            piece.style.fontSize =
+                (
+                    14
                     +
                     Math.random()
                     *
-                    4;
+                    18
+                )
+                +
+                "px";
 
 
-                piece.style.animationDuration =
-                    duration
-                    +
-                    "s";
+            const duration =
+                3
+                +
+                Math.random()
+                *
+                4;
 
 
-                document.body.appendChild(
-                    piece
-                );
+            piece.style.animationDuration =
+                duration
+                +
+                "s";
 
 
-                setTimeout(
+            document.body.appendChild(
+                piece
+            );
 
-                    () => {
 
-                        piece.remove();
+            setTimeout(() => {
 
-                    },
+                piece.remove();
 
-                    duration
-                    *
-                    1000
+            }, duration * 1000);
 
-                );
 
-            },
-
-            i * 45
-
-        );
+        }, i * 42);
 
     }
 
@@ -646,8 +812,7 @@ const secretMessage =
 
 
 if (
-    surpriseButton
-    &&
+    surpriseButton &&
     secretMessage
 ) {
 
@@ -657,20 +822,18 @@ if (
 
         () => {
 
-            secretMessage
-                .classList
-                .toggle(
-                    "open"
-                );
-
-
-            if (
-                secretMessage
+            const opening =
+                !secretMessage
                     .classList
-                    .contains(
-                        "open"
-                    )
-            ) {
+                    .contains("open");
+
+
+            secretMessage.classList.toggle(
+                "open"
+            );
+
+
+            if (opening) {
 
                 surpriseButton.innerHTML =
                     "You Found It ❤️";
@@ -679,26 +842,20 @@ if (
                 launchMiniHeartBurst();
 
 
-                setTimeout(
+                setTimeout(() => {
 
-                    () => {
+                    secretMessage
+                        .scrollIntoView({
 
-                        secretMessage
-                            .scrollIntoView({
+                            behavior:
+                                "smooth",
 
-                                behavior:
-                                    "smooth",
+                            block:
+                                "center"
 
-                                block:
-                                    "center"
+                        });
 
-                            });
-
-                    },
-
-                    350
-
-                );
+                }, 350);
 
             }
 
@@ -718,7 +875,7 @@ if (
 
 
 /* ============================================================
-   HEART BURST FOR SECRET MESSAGE
+   SECRET MESSAGE HEART BURST
 ============================================================ */
 
 function launchMiniHeartBurst() {
@@ -733,96 +890,83 @@ function launchMiniHeartBurst() {
 
     for (
         let i = 0;
-        i < 25;
+        i < 30;
         i++
     ) {
 
-        setTimeout(
+        setTimeout(() => {
 
-            () => {
-
-                const heart =
-                    document.createElement(
-                        "div"
-                    );
+            const heart =
+                document.createElement(
+                    "div"
+                );
 
 
-                heart.className =
-                    "confetti-piece";
+            heart.className =
+                "confetti-piece";
 
 
-                heart.innerHTML =
-                    symbols[
-                        Math.floor(
-                            Math.random()
-                            *
-                            symbols.length
-                        )
-                    ];
-
-
-                heart.style.left =
-                    (
-                        35
-                        +
+            heart.innerHTML =
+                symbols[
+                    Math.floor(
                         Math.random()
                         *
-                        30
+                        symbols.length
                     )
-                    +
-                    "vw";
+                ];
 
 
-                heart.style.fontSize =
-                    (
-                        15
-                        +
-                        Math.random()
-                        *
-                        16
-                    )
-                    +
-                    "px";
-
-
-                const duration =
-                    2.5
+            heart.style.left =
+                (
+                    35
                     +
                     Math.random()
                     *
-                    2;
+                    30
+                )
+                +
+                "vw";
 
 
-                heart.style.animationDuration =
-                    duration
+            heart.style.fontSize =
+                (
+                    15
                     +
-                    "s";
-
-
-                document.body.appendChild(
-                    heart
-                );
-
-
-                setTimeout(
-
-                    () => {
-
-                        heart.remove();
-
-                    },
-
-                    duration
+                    Math.random()
                     *
-                    1000
+                    16
+                )
+                +
+                "px";
 
-                );
 
-            },
+            const duration =
+                2.5
+                +
+                Math.random()
+                *
+                2;
 
-            i * 35
 
-        );
+            heart.style.animationDuration =
+                duration
+                +
+                "s";
+
+
+            document.body.appendChild(
+                heart
+            );
+
+
+            setTimeout(() => {
+
+                heart.remove();
+
+            }, duration * 1000);
+
+
+        }, i * 35);
 
     }
 
