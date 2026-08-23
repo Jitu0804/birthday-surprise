@@ -1692,11 +1692,70 @@
             }
         }
 
+
+        /* =====================================================
+           BACKGROUND MUSIC BUTTON - ADDED ONLY
+        ===================================================== */
+
+        .music-button {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            z-index: 9999;
+
+            border: 1px solid rgba(255,255,255,.85);
+            background: rgba(255,255,255,.78);
+
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+
+            color: #8f315b;
+
+            padding: 12px 18px;
+            border-radius: 50px;
+
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow: 0 8px 25px rgba(120,45,80,.18);
+
+            transition: .3s ease;
+        }
+
+        .music-button:hover {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+            .music-button {
+                top: 12px;
+                right: 12px;
+                padding: 10px 14px;
+                font-size: 11px;
+            }
+        }
+
     </style>
 </head>
 
 
 <body>
+
+    <!-- =====================================================
+         BACKGROUND MUSIC - ADDED ONLY
+    ====================================================== -->
+
+    <audio id="backgroundMusic" loop>
+        <source src="birthday-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="musicButton" class="music-button">
+        🎵 Play Music
+    </button>
+
 
     <div class="blob one"></div>
     <div class="blob two"></div>
@@ -3672,6 +3731,78 @@
             }
         );
 
+
+    
+
+        /* =====================================================
+           BACKGROUND MUSIC - ADDED ONLY
+        ===================================================== */
+
+        const backgroundMusic =
+            document.getElementById("backgroundMusic");
+
+        const musicButton =
+            document.getElementById("musicButton");
+
+        let isMusicPlaying =
+            false;
+
+        if (
+            backgroundMusic &&
+            musicButton
+        ) {
+
+            backgroundMusic.volume =
+                0.55;
+
+            musicButton.addEventListener(
+                "click",
+
+                async () => {
+
+                    if (
+                        !isMusicPlaying
+                    ) {
+
+                        try {
+
+                            await backgroundMusic.play();
+
+                            isMusicPlaying =
+                                true;
+
+                            musicButton.innerHTML =
+                                "⏸ Pause Music";
+
+                        }
+
+                        catch (error) {
+
+                            console.log(
+                                "Music could not play:",
+                                error
+                            );
+
+                        }
+
+                    }
+
+                    else {
+
+                        backgroundMusic.pause();
+
+                        isMusicPlaying =
+                            false;
+
+                        musicButton.innerHTML =
+                            "🎵 Play Music";
+
+                    }
+
+                }
+            );
+
+        }
 
     </script>
 
